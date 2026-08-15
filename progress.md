@@ -17,6 +17,7 @@
 | Komponensek | 22 React-komponens |
 | Adatbázis | Supabase, `leads` tábla 33 oszloppal, 2 biztonsági szabállyal |
 | Build | Hibamentes, TypeScript-hiba nélkül |
+| Verziókövetés | GitHub — [Tarcso-lab/temakft.hu](https://github.com/Tarcso-lab/temakft.hu) |
 
 ### Ami elkészült
 
@@ -32,9 +33,15 @@ felvételéhez nem kell React-et írni: egy új objektum a megfelelő tömbben, 
 **Űrlapok és lead-kezelés.** Öt űrlaptípus, tudatos elhelyezéssel: négylépéses
 részletes ajánlatkérő, gyors visszahívás, díjmentes felmérés, kapcsolatfelvétel
 és hibabejelentés. Minden beküldés a Supabase adatbázisba kerül, és e-mail
-értesítést indít. Spamvédelem: rejtett csapdamező, minimális kitöltési idő,
-IP-alapú sebességkorlát. Az adatbázison sorszintű biztonság van: a beérkezett
-megkereséseket a böngészőből senki nem tudja lekérdezni.
+értesítést indít — **a teljes lánc végigtesztelve, működik.** Spamvédelem:
+rejtett csapdamező, minimális kitöltési idő, IP-alapú sebességkorlát. Az
+adatbázison sorszintű biztonság van: a beérkezett megkereséseket a böngészőből
+senki nem tudja lekérdezni.
+
+**Verziókövetés.** A projekt GitHubon van, a Vercel össze van kötve a tárolóval.
+Innentől minden `git push` automatikusan új verziót élesít. A titkos kulcsokat
+tartalmazó `.env.local` szándékosan kimarad a feltöltésből — ezt a commit előtt
+mintakereséssel is ellenőriztük.
 
 **Arculat.** Saját formalogó — hatszögben geometrikus „T", átlós szikraközzel —,
 egyszínű változatban is, hímzéshez és szitanyomáshoz. A színvilág a munkaruha
@@ -75,21 +82,31 @@ Egy dolog maradt hátra, de nem blokkoló: a feladó jelenleg
 „Domains" menüjében, a `LEAD_EMAIL_FROM` átírható `noreply@temakft.hu` címre —
 a saját domainről küldött levél ritkábban kerül spambe.
 
-### 2.2 Domain és tárhely — *blokkoló*
+### 2.2 Élesítés — *folyamatban*
 
-A weboldal jelenleg csak a saját gépeden fut. **Részletes útmutató:
-[`docs/deploy.md`](docs/deploy.md).**
+**Részletes útmutató: [`docs/deploy.md`](docs/deploy.md).**
 
-A lényeg: **a Rackhost sima PHP-tárhelyén ez a weboldal nem fut**, mert Node.js-t
-igényel (az űrlapok szerveroldalon dolgoznak fel). **A domain viszont maradhat a
-Rackhostnál** — csak a DNS-rekordokat kell átirányítani.
+| Lépés | Állapot |
+|---|---|
+| Verziókövetés (git) | ✅ Kész — 130 fájl, `main` ág |
+| GitHub-tároló | ✅ Kész — [Tarcso-lab/temakft.hu](https://github.com/Tarcso-lab/temakft.hu) |
+| Vercel összekötése a tárolóval | ✅ Kész |
+| Környezeti változók a Vercelen | ⬜ **Hátra van** |
+| Kiszolgálási régió Frankfurtra | ⬜ Hátra van |
+| Domain + Rackhost DNS | ⬜ Hátra van |
 
-Két út van:
+**A következő teendő: a hat környezeti változó megadása a Vercelen**, még az
+első építés előtt. Öt értéket a `.env.local` fájlból lehet másolni, a hatodikat
+— `IP_HASH_SALT` — újra kell generálni élesre. Ha utólag adod hozzá őket, újra
+kell indítani egy építést, mert a `NEXT_PUBLIC_` változók beépülnek a buildbe.
 
-- **Vercel** *(ajánlott)* — 0 Ft ezen a méreten, ~30 perc beállítás, automatikus
-  SSL. A Next.js fejlesztőjének szolgáltatása, erre az alkalmazástípusra való.
-- **Rackhost VPS** — ha cél, hogy minden egy helyen legyen. Havidíjas, és a
-  szerver karbantartása, az SSL-megújítás a tiéd marad.
+Emellett érdemes a kiszolgálási régiót **Frankfurtra** állítani
+(Settings → Functions), mert az adatbázis is ott van — így minden űrlapbeküldés
+megspórol egy óceánon átívelő kört.
+
+> **Miért nem a Rackhost tárhelye?** A sima, PHP-s tárhelyeken ez a weboldal nem
+> fut, mert Node.js-t igényel (az űrlapok szerveroldalon dolgoznak fel).
+> **A domain viszont marad a Rackhostnál** — csak a DNS-rekordokat irányítjuk át.
 
 ### 2.3 Jogi szövegek jogi átnézése — *blokkoló*
 
@@ -175,7 +192,10 @@ oldalak hoznak megkeresést. Enélkül a további optimalizálás találgatás.
 
 | Tétel | Megjegyzés |
 |---|---|
+| `IP_HASH_SALT` élesben | A Vercelen egyedi értéket kell megadni, ne a fejlesztőit |
+| Resend feladó címe | Most `onboarding@resend.dev`; saját domain hitelesítése után `noreply@temakft.hu` |
 | `/projektek/atadas-uzembe-helyezes` | Nincs képe — egy letöltési URL hibás volt |
+| Git commit szerzője | `Tarcso-lab <katona200007@gmail.com>` — ha más a GitHub-fiók címe, a commit nem kapcsolódik hozzá |
 | Telefonszám, e-mail | Beállítva; ha változik, `src/lib/site.ts` |
 | Közösségi profilok | Üresen hagyva a konfigurációban, így nem jelennek meg |
 | Mobil menü gombfelirata | „Részletes ajánlatot kérek" maradt, a hero „Ajánlatot kérek" |
@@ -185,8 +205,10 @@ oldalak hoznak megkeresést. Enélkül a további optimalizálás találgatás.
 ## 5. Javasolt sorrend
 
 1. ~~Resend-kulcs beállítása~~ — **kész, tesztelve**
-2. Jogi szövegek véglegesítése és átnézetése *(a leghosszabb átfutás — érdemes most elindítani)*
-3. Élesítés: Vercel + Rackhost DNS *(~30 perc, lásd `docs/deploy.md`)*
+2. ~~GitHub + Vercel összekötés~~ — **kész**
+3. **Környezeti változók a Vercelen + régió Frankfurtra** *(10 perc — ez a soron következő)*
+4. Jogi szövegek véglegesítése és átnézetése *(a leghosszabb átfutás — érdemes most elindítani)*
+5. Domain rákötése: Vercel Domains + Rackhost DNS *(~20 perc)*
 4. Google Cégprofil létrehozása *(fél óra, a legnagyobb azonnali hatás)*
 5. Search Console és mérés bekötése *(fél óra)*
 6. Referenciamunkák és saját fotók összegyűjtése *(folyamatos, de ez hozza a legtöbbet)*

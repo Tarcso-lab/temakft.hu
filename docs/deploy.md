@@ -63,24 +63,63 @@ npx vercel --prod
 (privát) tárolóba, a Vercelen összekapcsolod, és onnantól minden módosítás
 automatikusan élesedik.
 
+### 2b. Beállítások a projekt létrehozásakor
+
+A Vercel a legtöbb mezőt magától kitölti. Amit **nem kell** átállítani:
+
+| Mező | Érték | Megjegyzés |
+|---|---|---|
+| Framework Preset | `Next.js` | Magától felismeri |
+| Root Directory | `./` | A projekt a repó gyökerében van |
+| Build Command | *(alapértelmezett)* | `next build` |
+| Output Directory | *(alapértelmezett)* | Ne írd felül |
+| Install Command | *(alapértelmezett)* | `npm install` |
+| Node.js Version | *(alapértelmezett)* | 20 vagy újabb kell, az alap megfelel |
+
+**Amit viszont muszáj:** a környezeti változók megadása még az első építés
+előtt — lásd a következő pontot.
+
 ### 3. Környezeti változók beállítása
 
 Ez a leggyakoribb hibaforrás: **a `.env.local` fájl szándékosan nem kerül fel**
-a szerverre. Az értékeket a Vercel felületén kell megadni:
+a GitHubra és a szerverre sem. Az értékeket a Vercel felületén kell megadni.
 
-**Settings → Environment Variables**, mindegyiket „Production" környezetre:
+**Hat változó kell.** A projekt létrehozásakor az „Environment Variables"
+szakaszban add meg őket, még az első építés előtt:
 
-| Név | Érték |
-|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | a `.env.local` fájlból |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | a `.env.local` fájlból |
-| `RESEND_API_KEY` | a `.env.local` fájlból |
-| `LEAD_EMAIL_FROM` | `TEMA weboldal <onboarding@resend.dev>` |
-| `LEAD_EMAIL_TO` | `tamaskoncsik9@gmail.com` |
-| `IP_HASH_SALT` | **írj be egy egyedi, véletlen szöveget** |
+| Név | Honnan | Megjegyzés |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | `.env.local` | Változatlanul |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `.env.local` | Változatlanul |
+| `RESEND_API_KEY` | `.env.local` | Változatlanul |
+| `LEAD_EMAIL_FROM` | `.env.local` | Változatlanul |
+| `LEAD_EMAIL_TO` | `.env.local` | Változatlanul |
+| `IP_HASH_SALT` | **új, egyedi érték** | A helyi fejlesztői értéket ne használd élesben |
 
-Beállítás után egyszer újra ki kell adni (`npx vercel --prod`), hogy érvényesek
-legyenek.
+> **Gyorsítás:** a Vercel mezőjébe a `.env.local` fájl tartalma egyben is
+> beilleszthető — felismeri a `NEV=ertek` sorokat, és szétbontja őket. A
+> `#` kezdetű megjegyzéssorokat nyugodtan bemásolhatod, azokat kihagyja.
+> Utána csak az `IP_HASH_SALT` értékét írd át.
+
+**Miért kell az építés ELŐTT megadni?** A `NEXT_PUBLIC_` előtagú változók
+beépülnek a lefordított kódba. Ha utólag adod hozzá őket, a már elkészült
+build nem látja őket — ilyenkor a Deployments fülön újra kell indítani egy
+építést („Redeploy").
+
+**A `SUPABASE_SERVICE_ROLE_KEY` nem kell.** Az adatbázison olyan biztonsági
+szabály van, ami a publikus kulccsal is engedi a beszúrást (de az olvasást nem),
+így a szolgáltatói kulcs nélkül is működik minden.
+
+### 3b. Kiszolgálási régió — érdemes átállítani
+
+Alapértelmezetten a Vercel az Egyesült Államokban futtatja a szerveroldali
+kódot, az adatbázis viszont Frankfurtban van. Így minden űrlapbeküldés
+óceánon átívelő oda-vissza utat tenne meg.
+
+**Settings → Functions → Function Region → Frankfurt (`fra1`)**
+
+Ez néhány száz ezredmásodpercet spórol beküldésenként, és a magyar látogatókhoz
+is közelebb van.
 
 ### 4. A domain hozzáadása
 
@@ -110,10 +149,21 @@ felületén látszik, amikor észleli. Az SSL-tanúsítványt utána magától k
 
 ### 6. Ellenőrzés élesítés után
 
+Először a Vercel ideiglenes címén (`*.vercel.app`), majd a saját domainen:
+
+- [ ] A főoldal betölt, a menü és a képek rendben megjelennek
+- [ ] **Küldj egy próba-ajánlatkérést** → megérkezik-e az e-mail
+      (ez ellenőrzi egyszerre a Supabase- és a Resend-beállítást)
 - [ ] `https://temakft.hu` betölt, és a `www` változat is átirányít
 - [ ] A lakat ikon látszik (érvényes SSL)
-- [ ] Küldj egy próba-ajánlatkérést → megérkezik-e az e-mail
 - [ ] `https://temakft.hu/sitemap.xml` és `/robots.txt` elérhető
+
+> **Az oldaltérképet csak akkor küldd be a Search Console-ba, ha a saját
+> domain már él.** A benne szereplő címek `temakft.hu`-ra mutatnak, tehát a
+> `*.vercel.app` címen még nem az igazi végleges állapotot tükrözik.
+
+Ha a próbabeküldés nem küld e-mailt, a hiba okát a Supabase `leads` táblájának
+`email_error` oszlopában találod — a megkeresés maga ilyenkor is elmentődik.
 
 ---
 

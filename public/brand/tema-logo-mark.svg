@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="512" height="512">
+  <title>TEMA formalogó — jel</title>
+  <path d="M35 4.95 46 24 35 43.05H13L2 24 13 4.95H35Z" fill="none" stroke="#0b100d" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M13.4 13H34.6v5.6H13.4V13Z" fill="#0b100d"/>
+  <path d="M20.6 18.6h6.8v7.5l-6.8 3.4v-10.9Z" fill="#a8e10c"/>
+  <path d="M20.6 32.1l6.8-3.4V39h-6.8v-6.9Z" fill="#0b100d"/>
+</svg>

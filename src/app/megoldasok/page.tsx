@@ -45,10 +45,10 @@ export default function Page() {
         <Container>
           <div className="overflow-hidden rounded-card border border-stone-200 shadow-xl shadow-ink-900/10">
             <Image
-              src="/images/varos-legifelvetel.png"
+              src="/images/varos-legifelvetel.webp"
               alt="Városrész madártávlatból irodaházakkal, ipari csarnokokkal és lakóépületekkel"
-              width={1600}
-              height={900}
+              width={1376}
+              height={768}
               priority
               sizes="(max-width: 1200px) 100vw, 1120px"
               className="h-auto w-full object-cover"
@@ -66,13 +66,15 @@ export default function Page() {
                   href={`/megoldasok/${segment.slug}`}
                   className="group flex h-full flex-col rounded-card border border-stone-200 bg-white p-6 transition-all duration-300 hover:border-signal-400 hover:shadow-md"
                 >
-                  <span className="text-3xl" aria-hidden>
-                    {segment.emoji}
-                  </span>
-                  <h2 className="mt-4 text-[1.15rem] font-bold leading-snug tracking-[-0.02em] text-ink-900">
-                    {segment.name}
-                  </h2>
-                  <p className="mt-2.5 flex-1 text-[0.88rem] leading-relaxed text-stone-600">
+                  <div className="flex items-start gap-3">
+                    <span className="shrink-0 text-2xl leading-snug" aria-hidden>
+                      {segment.emoji}
+                    </span>
+                    <h2 className="text-[1.15rem] font-bold leading-snug tracking-[-0.02em] text-ink-900">
+                      {segment.name}
+                    </h2>
+                  </div>
+                  <p className="mt-3 flex-1 text-[0.88rem] leading-relaxed text-stone-600">
                     {segment.lead}
                   </p>
                   <span className="mt-5 inline-flex items-center gap-1.5 text-[0.83rem] font-semibold text-ink-900 transition-colors group-hover:text-signal-700">

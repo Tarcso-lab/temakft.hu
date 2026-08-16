@@ -19,19 +19,19 @@ import { segments } from "@/lib/content";
  */
 const hubImages: Record<string, { src: string; alt: string }> = {
   uzemeltetes: {
-    src: "/images/elosztoszekreny-folyoso.png",
+    src: "/images/elosztoszekreny-folyoso.webp",
     alt: "Épület műszaki folyosója elosztószekrények sorával",
   },
   "tervezes-kivitelezes": {
-    src: "/images/villamos-szereles.png",
+    src: "/images/villamos-szereles.webp",
     alt: "Villamos szerelés kivitelezés alatt: kábeltálcák és behúzott vezetékek",
   },
   rendszerek: {
-    src: "/images/epulettechnika-panel.png",
+    src: "/images/epulettechnika-panel.webp",
     alt: "Épülettechnikai kezelőpanel és beléptető olvasó modern folyosón",
   },
   projektek: {
-    src: "/images/epitkezes-daru.png",
+    src: "/images/epitkezes-daru.webp",
     alt: "Építési terület állványzattal és toronydaruval",
   },
 };
@@ -69,8 +69,8 @@ export function HubPageView({ hub }: { hub: HubPage }) {
               <Image
                 src={image.src}
                 alt={image.alt}
-                width={1600}
-                height={900}
+                width={1376}
+                height={768}
                 priority
                 sizes="(max-width: 1200px) 100vw, 1120px"
                 className="h-auto w-full object-cover"
@@ -89,13 +89,15 @@ export function HubPageView({ hub }: { hub: HubPage }) {
                   href={hrefFor(page)}
                   className="group flex h-full flex-col rounded-card border border-stone-200 bg-white p-6 transition-all duration-300 hover:border-signal-400 hover:shadow-md"
                 >
-                  <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-ink-900 text-signal-400 transition-colors group-hover:bg-signal-400 group-hover:text-ink-900">
-                    <Icon name={page.icon} className="h-5 w-5" />
-                  </span>
-                  <h2 className="mt-5 text-[1.1rem] font-bold leading-snug tracking-[-0.02em] text-ink-900">
-                    {page.navLabel}
-                  </h2>
-                  <p className="mt-2.5 flex-1 text-[0.88rem] leading-relaxed text-stone-600">
+                  <div className="flex items-center gap-3.5">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ink-900 text-signal-400 transition-colors group-hover:bg-signal-400 group-hover:text-ink-900">
+                      <Icon name={page.icon} className="h-5 w-5" />
+                    </span>
+                    <h2 className="text-[1.1rem] font-bold leading-snug tracking-[-0.02em] text-ink-900">
+                      {page.navLabel}
+                    </h2>
+                  </div>
+                  <p className="mt-4 flex-1 text-[0.88rem] leading-relaxed text-stone-600">
                     {page.lead}
                   </p>
                   <span className="mt-5 inline-flex items-center gap-1.5 text-[0.83rem] font-semibold text-ink-900 transition-colors group-hover:text-signal-700">

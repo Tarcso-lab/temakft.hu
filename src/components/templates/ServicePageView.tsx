@@ -21,94 +21,94 @@ import { site } from "@/lib/site";
  */
 const pageImages: Record<string, { src: string; alt: string }> = {
   "uzemeltetes/muszaki-epuletuzemeltetes": {
-    src: "/images/gepeszeti-helyiseg.png",
+    src: "/images/gepeszeti-helyiseg.webp",
     alt: "Épületgépészeti helyiség elektromos szekrényekkel és kábeltálcákkal",
   },
   "uzemeltetes/villamos-uzemeltetes": {
-    src: "/images/elosztoberendezes.png",
+    src: "/images/elosztoberendezes.webp",
     alt: "Nyitott villamos elosztóberendezés rendezett kábelezéssel és sorba szerelt kismegszakítókkal",
   },
   "uzemeltetes/erintesvedelmi-felulvizsgalat": {
-    src: "/images/erintesvedelmi-meres.png",
+    src: "/images/erintesvedelmi-meres.webp",
     alt: "Érintésvédelmi mérés műszerrel villamos elosztóberendezésen",
   },
   "uzemeltetes/gyengearamu-rendszerek-uzemeltetese": {
-    src: "/images/rogzito-rack.png",
+    src: "/images/rogzito-rack.webp",
     alt: "Kamerarendszer hálózati rögzítői rackszekrényben, rendezett hálózati kábelezéssel",
   },
   "uzemeltetes/karbantartas": {
-    src: "/images/csarnok-vilagitas.png",
+    src: "/images/csarnok-vilagitas.webp",
     alt: "Ipari csarnok mennyezete LED-es világítótestek soraival",
   },
   "uzemeltetes/hibafeltaras-hibaelharitas": {
-    src: "/images/hokamera-vizsgalat.png",
+    src: "/images/hokamera-vizsgalat.webp",
     alt: "Hőkamerás vizsgálat villamos elosztóberendezésen, a kijelzőn melegedő ponttal",
   },
   "uzemeltetes/sla-rendelkezesre-allas": {
-    src: "/images/villanyszerelo-munka.png",
+    src: "/images/villanyszerelo-munka.webp",
     alt: "Villanyszerelő kábeleket köt be fali szerelvényszekrényben",
   },
 
   "tervezes-kivitelezes/erosaram": {
-    src: "/images/uj-elosztotabla.png",
+    src: "/images/uj-elosztotabla.webp",
     alt: "Épülő villamos elosztótábla kismegszakítókkal és rendezett vezetékkötegekkel",
   },
   "tervezes-kivitelezes/gyengearam": {
-    src: "/images/gyengearamu-kabelezes.png",
+    src: "/images/gyengearamu-kabelezes.webp",
     alt: "Gyengeáramú kábelkötegek kábeltálcán, álmennyezet felett",
   },
   "tervezes-kivitelezes/it-halozat": {
-    src: "/images/halozati-szekreny.png",
+    src: "/images/halozati-szekreny.webp",
     alt: "Hálózati szekrény rendezett optikai és réz patchkábelekkel, switchekkel",
   },
   "tervezes-kivitelezes/epuletautomatizalas": {
-    src: "/images/automatizalas-vezerlo.png",
+    src: "/images/automatizalas-vezerlo.webp",
     alt: "Épületautomatizálási vezérlőszekrény sínre szerelt modulokkal és kezelőpanellel",
   },
   "tervezes-kivitelezes/rendszerintegracio": {
-    src: "/images/felugyeleti-kozpont.png",
+    src: "/images/felugyeleti-kozpont.webp",
     alt: "Épületfelügyeleti helyiség monitorokkal, állapotjelző felületekkel és kameraképekkel",
   },
 
   "rendszerek/kamerarendszerek": {
-    src: "/images/kamera-mennyezet.png",
+    src: "/images/kamera-mennyezet.webp",
     alt: "Dómkamera modern épület mennyezetén, üveghomlokzat közelében",
   },
   "rendszerek/beleptetes": {
-    src: "/images/beleptetes-olvaso.png",
+    src: "/images/beleptetes-olvaso.webp",
     alt: "Beléptető kártyaolvasó irodai üvegajtó mellett",
   },
   "rendszerek/kaputelefon": {
-    src: "/images/kaputelefon-kulteri.png",
+    src: "/images/kaputelefon-kulteri.webp",
     alt: "Vandálbiztos video-kaputelefon kültéri egység társasház bejáratánál",
   },
   "rendszerek/strukturalt-halozat": {
-    src: "/images/patch-panel.png",
+    src: "/images/patch-panel.webp",
     alt: "Patch panel rendezett, színkódolt patchkábelekkel a rendezőszekrényben",
   },
   "rendszerek/okosepulet": {
-    src: "/images/okos-iroda-arnyekolas.png",
+    src: "/images/okos-iroda-arnyekolas.webp",
     alt: "Modern irodabelső motoros árnyékolással és mennyezeti jelenlét-érzékelővel",
   },
   "rendszerek/biztonsagtechnika": {
-    src: "/images/sorompo.png",
+    src: "/images/sorompo.webp",
     alt: "Automata sorompó telephely behajtójánál, felnyitott sorompókarral",
   },
 
   "projektek/generalkivitelezes": {
-    src: "/images/festes-vakolas.png",
+    src: "/images/festes-vakolas.webp",
     alt: "Belső felújítás: frissen vakolt falak, festőhenger és gipszkarton élvédő",
   },
   "projektek/projektmenedzsment": {
-    src: "/images/koordinacio-helyszin.png",
+    src: "/images/koordinacio-helyszin.webp",
     alt: "Két szakember tervrajzot néz át építési helyszínen",
   },
   "projektek/muszaki-koordinacio": {
-    src: "/images/felujitas-helyszin.png",
+    src: "/images/felujitas-helyszin.webp",
     alt: "Több szakág egyidejű munkája felújítás alatt álló belső téren",
   },
   "projektek/dokumentacio": {
-    src: "/images/dokumentacio-tervek.png",
+    src: "/images/dokumentacio-tervek.webp",
     alt: "Műszaki tervrajzok és megvalósulási dokumentáció mappában, mérőszalaggal",
   },
 };
@@ -192,8 +192,8 @@ export function ServicePageView({ page }: { page: ServicePage }) {
                   <Image
                     src={image.src}
                     alt={image.alt}
-                    width={1200}
-                    height={675}
+                    width={1376}
+                    height={768}
                     sizes="(max-width: 1024px) 100vw, 760px"
                     className="h-auto w-full object-cover"
                   />

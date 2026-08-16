@@ -308,13 +308,15 @@ export default function HomePage() {
                   href={`/megoldasok/${segment.slug}`}
                   className="group flex h-full flex-col rounded-card border border-ink-700 bg-ink-850 p-5 transition-all duration-300 hover:border-signal-400/60 hover:bg-ink-800"
                 >
-                  <span className="text-2xl" aria-hidden>
-                    {segment.emoji}
-                  </span>
-                  <h3 className="mt-3.5 text-[1rem] font-semibold leading-snug tracking-[-0.015em] text-white">
-                    {segment.name}
-                  </h3>
-                  <p className="mt-2 line-clamp-3 flex-1 text-[0.82rem] leading-relaxed text-stone-400">
+                  <div className="flex items-start gap-2.5">
+                    <span className="shrink-0 text-2xl leading-snug" aria-hidden>
+                      {segment.emoji}
+                    </span>
+                    <h3 className="text-[1rem] font-semibold leading-snug tracking-[-0.015em] text-white">
+                      {segment.name}
+                    </h3>
+                  </div>
+                  <p className="mt-2.5 line-clamp-3 flex-1 text-[0.82rem] leading-relaxed text-stone-400">
                     {segment.lead}
                   </p>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-[0.8rem] font-semibold text-signal-400">

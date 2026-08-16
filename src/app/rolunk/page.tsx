@@ -69,10 +69,10 @@ export default function Page() {
             <Reveal delay={0.1}>
               <div className="overflow-hidden rounded-card border border-white/10 shadow-2xl shadow-black/40">
                 <Image
-                  src="/images/irodahaz-epulet.png"
+                  src="/images/irodahaz-epulet.webp"
                   alt="Modern irodaház homlokzata esti kivilágításban"
-                  width={1200}
-                  height={675}
+                  width={1376}
+                  height={768}
                   priority
                   sizes="(max-width: 1024px) 100vw, 520px"
                   className="h-auto w-full object-cover"

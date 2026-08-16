@@ -93,7 +93,7 @@ export function Header() {
                 <Link
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-1 whitespace-nowrap rounded-md px-3 py-2 text-[0.86rem] font-medium transition-colors",
+                    "flex items-center gap-1 whitespace-nowrap rounded-md px-2 py-2 text-[0.82rem] font-medium transition-colors",
                     active ? "text-signal-400" : "text-stone-300 hover:text-white",
                   )}
                   aria-expanded={hasChildren ? openMenu === item.href : undefined}
@@ -165,10 +165,10 @@ export function Header() {
           })}
         </nav>
 
-        <div className="ml-auto flex items-center gap-2 xl:ml-4">
+        <div className="ml-auto flex shrink-0 items-center gap-2 xl:ml-4">
           <a
             href={site.contact.phoneHref}
-            className="hidden items-center gap-2 rounded-lg px-3 py-2 text-[0.86rem] font-semibold text-white transition-colors hover:text-signal-400 sm:flex"
+            className="hidden shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-2 py-2 text-[0.82rem] font-semibold text-white transition-colors hover:text-signal-400 sm:flex"
           >
             <Phone className="h-4 w-4" />
             {site.contact.phone}

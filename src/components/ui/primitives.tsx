@@ -85,7 +85,7 @@ const sizes: Record<ButtonSize, string> = {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-lg font-semibold tracking-[-0.01em] transition-all duration-200 active:translate-y-px disabled:pointer-events-none disabled:opacity-55";
+  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg font-semibold tracking-[-0.01em] transition-all duration-200 active:translate-y-px disabled:pointer-events-none disabled:opacity-55";
 
 export function Button({
   variant = "primary",

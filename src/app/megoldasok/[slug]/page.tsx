@@ -82,39 +82,39 @@ const relatedServices: Record<string, string[]> = {
  */
 const segmentImages: Record<string, { src: string; alt: string }> = {
   irodahazak: {
-    src: "/images/irodahaz-aula.png",
+    src: "/images/irodahaz-aula.webp",
     alt: "Modern irodaház aulája, beléptető olvasóval az üvegajtó mellett",
   },
   "ipari-logisztika": {
-    src: "/images/logisztikai-csarnok.png",
+    src: "/images/logisztikai-csarnok.webp",
     alt: "Logisztikai csarnok belső tere ipari LED-világítással és raktári állványokkal",
   },
   szallodak: {
-    src: "/images/szalloda-folyoso.png",
+    src: "/images/szalloda-folyoso.webp",
     alt: "Szállodai folyosó kártyás ajtónyitóval és szobai klímavezérlő panellel",
   },
   "uzletek-kereskedelem": {
-    src: "/images/uzlet-belso.png",
+    src: "/images/uzlet-belso.webp",
     alt: "Üzlet belső tere árupolcokkal, pénztárpulttal és mennyezeti biztonsági kamerával",
   },
   intezmenyek: {
-    src: "/images/intezmeny-folyoso.png",
+    src: "/images/intezmeny-folyoso.webp",
     alt: "Intézményi épület világos folyosója menekülési jelzéssel és beléptető olvasóval",
   },
   tarsashazak: {
-    src: "/images/tarsashaz-bejarat.png",
+    src: "/images/tarsashaz-bejarat.webp",
     alt: "Társasház felújított bejárati tere postaládákkal és video-kaputelefonnal",
   },
   "beruhazok-generalkivitelezok": {
-    src: "/images/epitkezes-daru.png",
+    src: "/images/epitkezes-daru.webp",
     alt: "Épülő kereskedelmi ingatlan építési területe állványzattal és toronydaruval",
   },
   ingatlankezelok: {
-    src: "/images/ingatlankezeles-terv.png",
+    src: "/images/ingatlankezeles-terv.webp",
     alt: "Ingatlankezelői íróasztal alaprajzokkal és épületfelügyeleti kimutatással",
   },
   "lakasok-csaladi-hazak": {
-    src: "/images/felujitott-lakas.png",
+    src: "/images/felujitott-lakas.webp",
     alt: "Frissen felújított, üres lakásbelső világos padlóval és nagy ablakkal",
   },
 };
@@ -189,8 +189,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               <Image
                 src={image.src}
                 alt={image.alt}
-                width={1600}
-                height={900}
+                width={1376}
+                height={768}
                 priority
                 sizes="(max-width: 1200px) 100vw, 1120px"
                 className="h-auto w-full object-cover"

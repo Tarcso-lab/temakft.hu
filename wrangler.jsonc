@@ -1,0 +1,24 @@
+/**
+ * Cloudflare Workers konfiguráció.
+ *
+ * A Next.js alkalmazást az OpenNext adapter fordítja Worker formátumra
+ * (`npx opennextjs-cloudflare build`), az eredmény a `.open-next` mappába
+ * kerül — ez nincs verziókövetve, minden építéskor újra elkészül.
+ *
+ * A `nodejs_compat` kapcsoló kötelező: az űrlapvégpont a `node:crypto`
+ * modult használja az IP-lenyomat képzéséhez.
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "temakft-hu",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-08-14",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

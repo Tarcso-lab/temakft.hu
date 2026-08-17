@@ -1,7 +1,10 @@
 # TEMA Menedzsment Kft. — weboldal · állapotjelentés
 
-**Utolsó frissítés:** 2026. augusztus 15.
-**Állapot:** fejlesztés kész, élesítésre vár. A weboldal jelenleg csak helyben fut.
+**Utolsó frissítés:** 2026. augusztus 17.
+**Állapot:** **élesben van.** A weboldal a saját domainen fut, az űrlapok
+mentenek és e-mail értesítést küldenek.
+
+**Élő cím:** [https://temakft.hu](https://temakft.hu)
 
 ---
 
@@ -12,45 +15,47 @@
 | | |
 |---|---|
 | Oldalak száma | **51** indexelhető oldal (58 építéskor, a technikai útvonalakkal együtt) |
-| Tartalom | ~3 900 sor strukturált szöveg (8 tartalmi adatfájl) |
-| Képek | 36 illusztráció |
+| Tartalom | ~4 000 sor strukturált szöveg (8 tartalmi adatfájl) |
+| Képek | 36 illusztráció, WebP formátumban — összesen 3,8 MB |
 | Komponensek | 22 React-komponens |
-| Adatbázis | Supabase, `leads` tábla 33 oszloppal, 2 biztonsági szabállyal |
-| Build | Hibamentes, TypeScript-hiba nélkül |
+| Adatbázis | Supabase, `leads` tábla 33 oszloppal, sorszintű biztonsággal |
+| Kiszolgálás | Cloudflare Workers, globális CDN-ről |
 | Verziókövetés | GitHub — [Tarcso-lab/temakft.hu](https://github.com/Tarcso-lab/temakft.hu) |
 
 ### Ami elkészült
 
-**Oldalszerkezet.** Az eredeti elképzelést megtartottuk, két kiegészítéssel:
-a `/megoldasok/…` célcsoport-oldalak (9 épülettípus) és az adatkezelési
-tájékoztató. A szolgáltatások négy fő ágra bomlanak — üzemeltetés, tervezés és
-kivitelezés, rendszerek, projektek —, összesen 23 aloldallal.
+**Élesítés.** A weboldal a Cloudflare Workersen fut, az OpenNext adapterrel.
+A domain a Rackhostnál maradt regisztrálva, de a névszervereket a Cloudflare
+kezeli. A `www.temakft.hu` 301-es átirányítással a www nélküli címre megy.
+Az SSL-tanúsítvány automatikus.
 
-**Tartalom.** A szövegek adatfájlokban vannak, nem a komponensekben. Új oldal
-felvételéhez nem kell React-et írni: egy új objektum a megfelelő tömbben, és az
-útvonal, a menü, az oldaltérkép és a belső linkek maguktól frissülnek.
+**Űrlapok és lead-kezelés.** Öt űrlaptípus: négylépéses részletes ajánlatkérő,
+gyors visszahívás, díjmentes felmérés, kapcsolatfelvétel és hibabejelentés.
+Minden beküldés a Supabase adatbázisba kerül, és e-mail értesítést indít —
+**a teljes lánc élesben végigtesztelve, működik.** Spamvédelem: rejtett
+csapdamező, minimális kitöltési idő, IP-alapú sebességkorlát. Az adatbázison
+egyetlen biztonsági szabály van érvényben: beszúrni lehet, olvasni nem.
 
-**Űrlapok és lead-kezelés.** Öt űrlaptípus, tudatos elhelyezéssel: négylépéses
-részletes ajánlatkérő, gyors visszahívás, díjmentes felmérés, kapcsolatfelvétel
-és hibabejelentés. Minden beküldés a Supabase adatbázisba kerül, és e-mail
-értesítést indít — **a teljes lánc végigtesztelve, működik.** Spamvédelem:
-rejtett csapdamező, minimális kitöltési idő, IP-alapú sebességkorlát. Az
-adatbázison sorszintű biztonság van: a beérkezett megkereséseket a böngészőből
-senki nem tudja lekérdezni.
+**E-mail.** A `temakft.hu` domain hitelesítve van a Resendnél (DKIM, SPF,
+DMARC rekordokkal), a feladó `noreply@temakft.hu`. A levelezés (MX, Rackhost)
+a névszerver-váltást sértetlenül átvészelte.
 
-**Verziókövetés.** A projekt GitHubon van, a Vercel össze van kötve a tárolóval.
-Innentől minden `git push` automatikusan új verziót élesít. A titkos kulcsokat
-tartalmazó `.env.local` szándékosan kimarad a feltöltésből — ezt a commit előtt
-mintakereséssel is ellenőriztük.
+**Képek.** A 36 illusztráció PNG-ről WebP-re konvertálva: **64,0 MB → 3,8 MB
+(−94%)**. Ez a legnagyobb egyszeri sebességjavulás, és a kiszolgálási költséget
+is ez határozza meg.
+
+**Jogi szövegek.** Az ÁSZF, a garanciális feltételek és az adatkezelési
+tájékoztató konkrét értékekkel kitöltve, „Hatályos: 2026. február 1."
+dátummal. A korábbi figyelmeztető sáv eltávolítva. **Jogi átnézés még nem
+történt** — lásd a 2.1 pontot.
 
 **Arculat.** Saját formalogó — hatszögben geometrikus „T", átlós szikraközzel —,
-egyszínű változatban is, hímzéshez és szitanyomáshoz. A színvilág a munkaruha
-neon zöld–fekete párosából származik, de a neon csak akcentusként jelenik meg.
+egyszínű változatban is, hímzéshez és szitanyomáshoz.
 
-**SEO.** Valós DataForSEO-adatokra épülő kulcsszókutatás (495 vizsgált kifejezés,
-élő SERP-elemzéssel), és az ez alapján átalakított tartalom. Minden oldalon
-egyedi meta-adatok a határértékeken belül, strukturált adatok (Organization,
-Service, FAQPage, Article, BreadcrumbList), automatikus oldaltérkép.
+**SEO.** Valós DataForSEO-adatokra épülő kulcsszókutatás (495 vizsgált
+kifejezés), egyedi meta-adatok minden oldalon, strukturált adatok
+(Organization, Service, FAQPage, Article, BreadcrumbList), automatikus
+oldaltérkép.
 
 **Dokumentáció és segédeszközök.**
 
@@ -60,131 +65,112 @@ Service, FAQPage, Article, BreadcrumbList), automatikus oldaltérkép.
 | `docs/seo-kutatas.md` | A DataForSEO piackutatás teljes eredménye |
 | `docs/google-cegprofil.md` | Cégprofil-leírás (724 karakter) + beállítási útmutató |
 | `docs/uj-cikk.md` | Hogyan írj új tudástári cikket, másolható sablonnal |
-| `docs/deploy.md` | Élesítés lépésről lépésre, Rackhost DNS-beállítással |
+| `docs/deploy.md` | Élesítési útmutató — **elavult, a Vercel-utat írja le** |
 | `docs/resend-teszt.ps1` | E-mail küldés ellenőrzése egy paranccsal |
 | `docs/dfs-teszt.ps1` | DataForSEO hozzáférés ellenőrzése |
 | `indit.bat` | A fejlesztői szerver indítása duplakattintással |
 
 ---
 
-## 2. Mi hiányzik az élesítéshez
+## 2. Ami hátravan
 
-Ezek nélkül a weboldal nem mehet ki éles környezetbe. Sorrendben:
+### 2.1 Jogi átnézés — *a legfontosabb nyitott tétel*
 
-### 2.1 ~~Resend API-kulcs~~ — **KÉSZ**
-
-Az e-mail értesítés működik. A teljes láncot végigteszteltük: űrlap beküldése →
-adatbázisba mentés → értesítő levél kiküldése. A `leads` táblában
-`email_sent: true`, hibaüzenet nincs.
-
-Egy dolog maradt hátra, de nem blokkoló: a feladó jelenleg
-`onboarding@resend.dev`. Ha a `temakft.hu` domaint hitelesítitek a Resend
-„Domains" menüjében, a `LEAD_EMAIL_FROM` átírható `noreply@temakft.hu` címre —
-a saját domainről küldött levél ritkábban kerül spambe.
-
-### 2.2 Élesítés — *folyamatban*
-
-**Részletes útmutató: [`docs/deploy.md`](docs/deploy.md).**
-
-| Lépés | Állapot |
-|---|---|
-| Verziókövetés (git) | ✅ Kész — 130 fájl, `main` ág |
-| GitHub-tároló | ✅ Kész — [Tarcso-lab/temakft.hu](https://github.com/Tarcso-lab/temakft.hu) |
-| Vercel összekötése a tárolóval | ✅ Kész |
-| Környezeti változók a Vercelen | ⬜ **Hátra van** |
-| Kiszolgálási régió Frankfurtra | ⬜ Hátra van |
-| Domain + Rackhost DNS | ⬜ Hátra van |
-
-**A következő teendő: a hat környezeti változó megadása a Vercelen**, még az
-első építés előtt. Öt értéket a `.env.local` fájlból lehet másolni, a hatodikat
-— `IP_HASH_SALT` — újra kell generálni élesre. Ha utólag adod hozzá őket, újra
-kell indítani egy építést, mert a `NEXT_PUBLIC_` változók beépülnek a buildbe.
-
-Emellett érdemes a kiszolgálási régiót **Frankfurtra** állítani
-(Settings → Functions), mert az adatbázis is ott van — így minden űrlapbeküldés
-megspórol egy óceánon átívelő kört.
-
-> **Miért nem a Rackhost tárhelye?** A sima, PHP-s tárhelyeken ez a weboldal nem
-> fut, mert Node.js-t igényel (az űrlapok szerveroldalon dolgoznak fel).
-> **A domain viszont marad a Rackhostnál** — csak a DNS-rekordokat irányítjuk át.
-
-### 2.3 Jogi szövegek jogi átnézése — *blokkoló*
-
-Az ÁSZF, a garanciális feltételek és az adatkezelési tájékoztató **kidolgozott
-tervezetek**, de szögletes zárójeles helyekkel: `[12] hónap`, `[15] nap`,
-hatálybalépési dátumok. Ezeket a tényleges gyakorlatotokra kell állítani, és
-jogásszal átnézetni. Addig figyelmeztető sáv látszik az oldalak tetején.
+A szövegekben már nincs kitöltetlen hely, és a számok a tényleges
+gyakorlatotokat tükrözik. Azt viszont, hogy a **megfogalmazás jogilag
+helytálló-e**, csak ügyvéd tudja megmondani. A figyelmeztető sáv levételével
+ezek a dokumentumok véglegesként jelennek meg a látogatóknak.
 
 Külön mérlegelendő: **a székhely nincs feltüntetve** a weboldalon, a kérésednek
 megfelelően. Az elektronikus kereskedelmi törvény viszont előírja a szolgáltató
 székhelyének megjelenítését. Ha nem akarjátok a magánlakcímet közzétenni,
 székhelyszolgáltatás a szokásos megoldás.
 
+### 2.2 Vercel leválasztása
+
+A Vercel még mindig rá van kötve a GitHub-tárolóra, és minden feltöltésnél
+fölöslegesen lefuttat egy építést. A domain már nem mutat rá, tehát ártalmatlan
+— de érdemes kikapcsolni az automatikus élesítést vagy törölni a projektet.
+
+### 2.3 Google Search Console
+
+A domain él, a `sitemap.xml` elérhető — **most már van értelme beküldeni.**
+Tulajdon hitelesítése, majd az oldaltérkép beküldése. Enélkül nem látszik,
+mire jelenik meg a weboldal.
+
 ### 2.4 Google Cégprofil
 
-A leírás elkészült (724 karakter), a beállítási útmutatóval együtt. **A helyi
-keresésekben ez a legnagyobb hatású egyetlen lépés** — nagyobb, mint bármi, amit
-a weboldal szövegén még csiszolni lehet. „Szolgáltatási területű vállalkozásként"
+A leírás elkészült (`docs/google-cegprofil.md`). **A helyi keresésekben ez a
+legnagyobb hatású egyetlen lépés.** „Szolgáltatási területű vállalkozásként"
 kell beállítani, cím nélkül.
 
-### 2.5 Google Search Console
+### 2.5 Fiókhigiénia
 
-Élesítés után: tulajdon hitelesítése, oldaltérkép beküldése. Enélkül vakon
-repülünk — nem látszik, mire jelenik meg a weboldal.
+- **A Cloudflare API-token törlése** — a beállításhoz használt token bekerült
+  egy beszélgetés naplójába. My Profile → API Tokens → Delete.
+- **A DataForSEO API-jelszót cseréld le** — ugyanez a helyzet.
+- A Resend-kulcs cseréjéről úgy döntöttél, hogy nem szükséges.
+- **A GitHub-tároló nyilvános.** Titkos adat nincs benne, de a teljes forráskód
+  és a fejlesztés története bárki számára látható. Ha ez nem szándékos:
+  Settings → General → Change visibility.
 
 ---
 
 ## 3. Amire érdemes több időt fordítani
 
-Ezek nem blokkolók, de ezeken múlik, hogy a weboldal hoz-e valódi ügyfelet.
-
 ### 3.1 Referenciák — a legnagyobb hiány
 
 **Jelenleg egyetlen konkrét munka sincs a weboldalon.** Se fotó, se projektnév,
-se szám, se ügyfélvélemény. Egy műszaki szolgáltatónál ez a legerősebb bizonyíték,
-és a jelenlegi legnagyobb konverziós gyengeség.
+se szám, se ügyfélvélemény. Egy műszaki szolgáltatónál ez a legerősebb
+bizonyíték, és a jelenlegi legnagyobb konverziós gyengeség.
 
-Amivel a legtöbbet lehetne nyerni, csökkenő sorrendben:
+Csökkenő sorrendben, amivel a legtöbbet lehet nyerni:
 
 1. **5–10 valós referenciamunka** rövid leírással: milyen épület, mi volt a
    feladat, mi lett az eredmény. Név nélkül is működik („1 400 m²-es irodaház,
    XIII. kerület").
 2. **Saját fotók** ezekről a munkákról. A jelenlegi 36 kép AI-generált
-   illusztráció — jó helykitöltő, de nem bizonyíték, és nem is állítjuk róla,
-   hogy az lenne.
+   illusztráció — jó helykitöltő, de nem bizonyíték.
 3. **Ügyfélvélemények**, akár két mondat, névvel és cégnévvel.
 
-### 3.2 Tudástár bővítése
+### 3.2 Az oldaltérkép `lastmod` mezőjének javítása — *valódi hiba*
 
-Hat cikk van. A kutatás szerint az informatív keresések adják a forgalom nagy
-részét ezen a piacon — a „generálkivitelezés" kifejezés keresési szándéka is
-**informational**. Néhány további cikk, amire konkrét kereslet mérhető:
+A `src/app/sitemap.ts` minden oldalra a lekérdezés pillanatát írja
+módosítási dátumnak. A Google ilyenkor egy idő után figyelmen kívül hagyja a
+mezőt — pont azt a jelzést veszítjük el, amivel a friss tartalmat kiemelhetnénk.
+A cikkeknél már jó a megoldás; ezt kell kiterjeszteni a többi oldaltípusra.
 
-- „Mi az a generálkivitelezés, és mikor éri meg?"
-- „Mennyibe kerül egy teljes lakásfelújítás?" — az árkeresés erős
-- „Kaputelefon csere társasházban: mit kell tudni a közgyűlés előtt?"
-- „Hikvision kamerarendszer: melyik típus mire jó?"
+### 3.3 Napi tartalom: előbb a szerkesztési folyamat
 
-### 3.3 A facility management rés kiaknázása
+A cikkek jelenleg TypeScript-objektumként állnak az `articles.ts` fájlban,
+cikkenként ~80 sor. Hat cikkhez ez megfelelt, **napi publikáláshoz nem**: egy
+elgépelt vessző megtöri az építést. Ha rendszeres tartalom a cél, előbb:
+
+1. a cikkek átállítása Markdownra,
+2. böngészőből használható szerkesztőfelület (Keystatic vagy Sveltia — git-alapú,
+   ingyenes, szerver nélkül),
+3. RSS-csatorna a tudástárhoz, az új cikkek gyorsabb felfedezéséhez.
+
+Témajavaslatok, amikre mérhető kereslet van: „Mi az a generálkivitelezés, és
+mikor éri meg?", „Mennyibe kerül egy teljes lakásfelújítás?", „Kaputelefon
+csere társasházban", „Hikvision kamerarendszer: melyik típus mire jó?".
+
+Egy megjegyzés az ütemhez: a napi cikk önmagában nem hoz helyezést — a Google
+kifejezetten szűri a mennyiségi, felszínes tartalmat. Heti 2–3 valóban hasznos,
+tapasztalatból írt cikk többet ér.
+
+### 3.4 A facility management rés kiaknázása
 
 A kutatás legérdekesebb megállapítása: a „műszaki épületüzemeltetés" találati
-listáján **a nyolc helyből kettőt álláshirdetés-portál foglal el**, a többi pedig
-nagy, személytelen FM-cég. Ez szokatlanul gyenge verseny. Egy alaposabb,
-konkrétabb tartalom itt aránytalanul jó helyezést érhet el.
+listáján **a nyolc helyből kettőt álláshirdetés-portál foglal el**, a többi
+nagy, személytelen FM-cég. Ez szokatlanul gyenge verseny.
 
-### 3.4 Mérés
+### 3.5 Mérés
 
-Jelenleg semmilyen látogatottságmérés nincs a weboldalon. Élesítés után érdemes
-egy adatvédelmi szempontból tiszta megoldást bekötni, hogy látszódjon, mely
-oldalak hoznak megkeresést. Enélkül a további optimalizálás találgatás.
-
-### 3.5 Fiókhigiénia
-
-- **A DataForSEO API-jelszót cseréld le** — a kutatás során bekerült a
-  beszélgetés naplójába. Dashboard → API Access, egy kattintás.
-- A DataForSEO-egyenleg ~0,67 USD. Egy későbbi, teljes kutatáshoz érdemes
-  feltölteni néhány dollárt.
-- Higgsfield: ~34 kredit maradt (kb. 17 kép).
+Jelenleg semmilyen látogatottságmérés nincs a weboldalon — ezt az adatkezelési
+tájékoztató is így rögzíti. Élesítés után érdemes egy adatvédelmi szempontból
+tiszta megoldást bekötni. **Ha bekötjük, az adatkezelési tájékoztató 5.
+pontját frissíteni kell.**
 
 ---
 
@@ -192,27 +178,50 @@ oldalak hoznak megkeresést. Enélkül a további optimalizálás találgatás.
 
 | Tétel | Megjegyzés |
 |---|---|
-| `IP_HASH_SALT` élesben | A Vercelen egyedi értéket kell megadni, ne a fejlesztőit |
-| Resend feladó címe | Most `onboarding@resend.dev`; saját domain hitelesítése után `noreply@temakft.hu` |
+| `docs/deploy.md` | Elavult: a Vercel-utat írja le. Átírandó a Cloudflare-re |
+| `sites_count` oszlop | Az adatbázisban van, de a kód sosem tölti ki — a helyszínek számát a `details.site_scope` mezőbe teszi |
 | `/projektek/atadas-uzembe-helyezes` | Nincs képe — egy letöltési URL hibás volt |
-| Git commit szerzője | `Tarcso-lab <katona200007@gmail.com>` — ha más a GitHub-fiók címe, a commit nem kapcsolódik hozzá |
+| Mobil menü gombfelirata | „Részletes ajánlatot kérek" maradt, a hero „Ajánlatot kérek" |
+| Teszt-sorok az adatbázisban | 20 sor, jórészt próbabeküldés — törölhetők |
 | Telefonszám, e-mail | Beállítva; ha változik, `src/lib/site.ts` |
 | Közösségi profilok | Üresen hagyva a konfigurációban, így nem jelennek meg |
-| Mobil menü gombfelirata | „Részletes ajánlatot kérek" maradt, a hero „Ajánlatot kérek" |
 
 ---
 
 ## 5. Javasolt sorrend
 
-1. ~~Resend-kulcs beállítása~~ — **kész, tesztelve**
-2. ~~GitHub + Vercel összekötés~~ — **kész**
-3. **Környezeti változók a Vercelen + régió Frankfurtra** *(10 perc — ez a soron következő)*
-4. Jogi szövegek véglegesítése és átnézetése *(a leghosszabb átfutás — érdemes most elindítani)*
-5. Domain rákötése: Vercel Domains + Rackhost DNS *(~20 perc)*
-4. Google Cégprofil létrehozása *(fél óra, a legnagyobb azonnali hatás)*
-5. Search Console és mérés bekötése *(fél óra)*
-6. Referenciamunkák és saját fotók összegyűjtése *(folyamatos, de ez hozza a legtöbbet)*
-7. Tudástár bővítése, negyedévente néhány cikk
+1. **Cloudflare API-token törlése** *(1 perc, biztonsági)*
+2. **Search Console + oldaltérkép beküldése** *(fél óra — most már van értelme)*
+3. **Google Cégprofil létrehozása** *(fél óra, a legnagyobb azonnali hatás)*
+4. **Vercel leválasztása** *(5 perc)*
+5. **Jogi átnézés elindítása** *(a leghosszabb átfutás)*
+6. **`lastmod` javítása** *(fél óra, valódi hiba)*
+7. **Referenciamunkák és saját fotók összegyűjtése** *(folyamatos — ez hozza a legtöbbet)*
+8. Tudástár bővítése, előtte a szerkesztési folyamat rendbetétele
 
-Az 1–5. lépés együtt egy nap alatt elvégezhető. A 6. az, amin hosszú távon a
-weboldal eredményessége múlik.
+Az 1–4. lépés együtt egy délelőtt alatt elvégezhető. A 7. az, amin hosszú távon
+a weboldal eredményessége múlik.
+
+---
+
+## 6. Üzemeltetési tudnivalók
+
+**Új verzió élesítése:** minden `git push` a `main` ágra automatikusan új
+építést és élesítést indít a Cloudflare-en. Az építés 2–4 perc.
+
+**A környezeti változók két külön helyen élnek**, és ez a leggyakoribb
+hibaforrás:
+
+| Hely | Mi kerül ide | Mikor él |
+|---|---|---|
+| Workers Builds → *Build variables* | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` | csak építéskor |
+| Worker → *Variables and Secrets* | `RESEND_API_KEY`, `IP_HASH_SALT`, `LEAD_EMAIL_FROM`, `LEAD_EMAIL_TO` | a kérések kiszolgálásakor |
+
+A `NEXT_PUBLIC_` előtagú változók beépülnek a lefordított kódba, ezért azok
+**az építés előtt** kellenek. A többit a Worker futás közben olvassa. Ha egy
+titok hiányzik, a `wrangler secret list` parancs azonnal megmutatja.
+
+**Ha nem érkezik e-mail az űrlapokról:** a hiba oka a Supabase `leads`
+táblájának `email_error` oszlopában áll. A megkeresés maga ilyenkor is
+elmentődik — a kód szándékosan csak akkor jelez hibát a látogatónak, ha sem a
+mentés, sem az értesítés nem sikerült.

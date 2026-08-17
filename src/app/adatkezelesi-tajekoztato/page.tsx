@@ -96,7 +96,7 @@ const blocks: ContentBlock[] = [
       ],
       [
         "Cloudflare, Inc.",
-        "A weboldal üzemeltetése, kiszolgálása",
+        "A weboldal üzemeltetése, kiszolgálása, valamint süti nélküli látogatottságmérés",
         "Európai Unió és nemzetközi (globális kiszolgálóhálózat), megfelelő garanciák mellett",
       ],
     ],
@@ -113,7 +113,7 @@ const blocks: ContentBlock[] = [
   },
   {
     type: "p",
-    text: "A weboldalon jelenleg nem működik statisztikai vagy marketing célú mérőkód. Amennyiben a jövőben ilyen kerül elhelyezésre, annak működése előzetes hozzájáruláshoz kötött, és a hozzájárulás bármikor visszavonható.",
+    text: "A látogatottság mérésére a Cloudflare Web Analytics szolgáltatását használjuk. Ez a megoldás nem helyez el sütit a látogató eszközén, nem hoz létre egyedi látogatóazonosítót, és nem követi a látogatót más weboldalakon. Kizárólag összesített statisztikát készít: mely oldalakat nyitják meg, milyen gyorsan töltenek be, és nagy vonalakban honnan érkezik a forgalom.",
   },
 
   { type: "h2", text: "6. Adatbiztonsági intézkedések" },

@@ -202,7 +202,7 @@ export function Header() {
               <MobileNav />
               <div className="mt-6 flex flex-col gap-2.5">
                 <ButtonLink href="/ajanlatkeres" size="lg" className="w-full">
-                  Részletes ajánlatot kérek
+                  Ajánlatot kérek
                 </ButtonLink>
                 <a
                   href={site.contact.phoneHref}

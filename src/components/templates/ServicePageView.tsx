@@ -111,6 +111,10 @@ const pageImages: Record<string, { src: string; alt: string }> = {
     src: "/images/dokumentacio-tervek.webp",
     alt: "Műszaki tervrajzok és megvalósulási dokumentáció mappában, mérőszalaggal",
   },
+  "projektek/atadas-uzembe-helyezes": {
+    src: "/images/atadas-jegyzokonyv.webp",
+    alt: "Átadás-átvételi jegyzőkönyv aláírása egy újonnan telepített villamos elosztóberendezés előtt",
+  },
 };
 
 const asideCopy: Record<ServicePage["ctaVariant"], { title: string; text: string }> = {

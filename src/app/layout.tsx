@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
@@ -66,6 +67,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <StickyCta />
         {/* A rögzített mobil CTA-sáv ne takarja el a lábléc utolsó sorát. */}
         <div aria-hidden className="h-[68px] md:hidden" />
+
+        {/*
+         * Cloudflare Web Analytics — süti nélküli, személyes adatot nem gyűjtő
+         * látogatottságmérés.
+         *
+         * Miért kézzel? A Cloudflare felületén az „automatikus telepítés" be van
+         * kapcsolva, de az élő oldalon nem jelent meg a mérőkód: az automatikus
+         * beszúrás a Worker által előállított válaszokon nem fut le. Ez a
+         * beillesztés viszont mindig működik.
+         *
+         * A token nyilvános, szándékosan látszik a HTML-ben — nem titok.
+         */}
+        <Script
+          strategy="afterInteractive"
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "f24495033a204429b90c7b923d39584f"}'
+        />
       </body>
     </html>
   );

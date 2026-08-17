@@ -29,7 +29,7 @@ const blocks: ContentBlock[] = [
     rows: [
       [
         "Szerelési, kivitelezési munka",
-        "[12] hónap",
+        "36 hónap",
         "Az átadás-átvételi jegyzőkönyv aláírásának napjától",
       ],
       [
@@ -39,12 +39,12 @@ const blocks: ContentBlock[] = [
       ],
       [
         "Kopó alkatrészek (akkumulátor, fényforrás, tömítés)",
-        "[6] hónap",
+        "12 hónap",
         "A rendeltetésszerű elhasználódás nem garanciális esemény",
       ],
       [
         "Javítási munka",
-        "[6] hónap",
+        "6 hónap",
         "Kizárólag a javítással érintett hibajelenségre",
       ],
     ],
@@ -141,9 +141,10 @@ export default function Page() {
     <LegalPageView
       title="Garanciális feltételek"
       href="/garancialis-feltetelek"
-      effectiveFrom="[2026. ____ ____.]"
+      effectiveFrom="2026. február 1."
       lead="Az alábbiakban összefoglaljuk, mire terjed ki a garanciánk, mi az, ami nem tartozik a hatálya alá, és hogyan lehet garanciális igényt bejelenteni. Célunk, hogy ez ne utólagos vita kérdése legyen."
       blocks={blocks}
+      reviewNote={false}
     />
   );
 }

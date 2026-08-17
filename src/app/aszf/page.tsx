@@ -22,7 +22,7 @@ const blocks: ContentBlock[] = [
       ["Adószám", site.contact.taxNumber],
       ["E-mail", site.contact.email],
       ["Telefon", site.contact.phone],
-      ["Nyilvántartó hatóság", "[kitöltendő]"],
+      ["Nyilvántartó hatóság", "Budapest Környéki Törvényszék Cégbírósága"],
     ],
   },
 
@@ -100,7 +100,7 @@ const blocks: ContentBlock[] = [
       "A szolgáltatás díja az elfogadott árajánlat, illetve az egyedi szerződés szerint kerül meghatározásra.",
       "Üzemeltetési és karbantartási szerződés esetén a Szolgáltató havidíjat számláz; az anyagköltség és a cserealkatrészek díja ettől elkülönülten, előzetes egyeztetés után kerül felszámításra.",
       "Eseti munkavégzés esetén a Szolgáltató a mindenkori óradíja és a felhasznált anyagok alapján számláz.",
-      "A fizetési határidő — eltérő megállapodás hiányában — a számla kiállításától számított [15] nap.",
+      "A fizetési határidő — eltérő megállapodás hiányában — a számla kiállításától számított 8 nap.",
       "Késedelmes fizetés esetén a Szolgáltató a jogszabály szerinti késedelmi kamat és behajtási költségátalány érvényesítésére jogosult.",
       "A Szolgáltató nagyobb volumenű kivitelezés esetén előleg és részszámlázás alkalmazására jogosult, az egyedi szerződésben rögzített ütemezés szerint.",
     ],
@@ -154,7 +154,7 @@ const blocks: ContentBlock[] = [
   { type: "h2", text: "13. Panaszkezelés és jogviták" },
   {
     type: "p",
-    text: `A Megrendelő panaszát a ${site.contact.email} címen vagy a ${site.contact.phone} telefonszámon jelentheti be. A Szolgáltató a panaszt kivizsgálja, és arra [30] napon belül írásban válaszol.`,
+    text: `A Megrendelő panaszát a ${site.contact.email} címen vagy a ${site.contact.phone} telefonszámon jelentheti be. A Szolgáltató a panaszt kivizsgálja, és arra 15 napon belül írásban válaszol.`,
   },
   {
     type: "p",
@@ -173,9 +173,10 @@ export default function Page() {
     <LegalPageView
       title="Általános Szerződési Feltételek"
       href="/aszf"
-      effectiveFrom="[2026. ____ ____.]"
+      effectiveFrom="2026. február 1."
       lead="A jelen dokumentum a TEMA Menedzsment Kft. szolgáltatásaira vonatkozó általános szerződési feltételeket tartalmazza. Az egyedi szerződés eltérő rendelkezései minden esetben elsőbbséget élveznek."
       blocks={blocks}
+      reviewNote={false}
     />
   );
 }

@@ -63,10 +63,10 @@ const blocks: ContentBlock[] = [
   {
     type: "ul",
     items: [
-      "Megkeresés, ajánlatkérés esetén: a megkeresés lezárásától számított [24] hónapig, hogy egy későbbi kapcsolatfelvételnél az előzmények elérhetők legyenek.",
+      "Megkeresés, ajánlatkérés esetén: a megkeresés lezárásától számított minimum 24 hónapig, hogy egy későbbi kapcsolatfelvételnél az előzmények elérhetők legyenek.",
       "Szerződés létrejötte esetén: a szerződéses jogviszony megszűnését követően a jogszabályi megőrzési kötelezettségek szerinti ideig.",
       "Számviteli bizonylatokhoz kapcsolódó adatok esetén: a számvitelről szóló törvény szerint 8 évig.",
-      "Biztonsági célú technikai adatok (IP-lenyomat, user agent) esetén: [12] hónapig.",
+      "Biztonsági célú technikai adatok (IP-lenyomat, user agent) esetén: 60 hónapig.",
       "Hírlevél esetén: a hozzájárulás visszavonásáig.",
     ],
   },
@@ -95,9 +95,9 @@ const blocks: ContentBlock[] = [
         "Európai Unió / Egyesült Államok, megfelelő garanciák mellett",
       ],
       [
-        "[Tárhelyszolgáltató]",
+        "Cloudflare, Inc.",
         "A weboldal üzemeltetése, kiszolgálása",
-        "[kitöltendő]",
+        "Európai Unió és nemzetközi (globális kiszolgálóhálózat), megfelelő garanciák mellett",
       ],
     ],
   },
@@ -113,7 +113,7 @@ const blocks: ContentBlock[] = [
   },
   {
     type: "p",
-    text: "Amennyiben a weboldalon a jövőben statisztikai vagy marketing célú mérőkód kerül elhelyezésre, annak működése előzetes hozzájáruláshoz kötött, és a hozzájárulás bármikor visszavonható. [Ezt a bekezdést a ténylegesen alkalmazott mérőeszközökre kell pontosítani.]",
+    text: "A weboldalon jelenleg nem működik statisztikai vagy marketing célú mérőkód. Amennyiben a jövőben ilyen kerül elhelyezésre, annak működése előzetes hozzájáruláshoz kötött, és a hozzájárulás bármikor visszavonható.",
   },
 
   { type: "h2", text: "6. Adatbiztonsági intézkedések" },
@@ -163,9 +163,10 @@ export default function Page() {
     <LegalPageView
       title="Adatkezelési tájékoztató"
       href="/adatkezelesi-tajekoztato"
-      effectiveFrom="[2026. ____ ____.]"
+      effectiveFrom="2026. február 1."
       lead="Ez a tájékoztató azt írja le, milyen személyes adatokat kezelünk a weboldalon keresztül, milyen célból és meddig, kik férnek hozzájuk, és Önnek milyen jogai vannak."
       blocks={blocks}
+      reviewNote={false}
     />
   );
 }

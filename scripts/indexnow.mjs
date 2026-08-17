@@ -2,8 +2,7 @@
  * IndexNow-bejelentés.
  *
  * Az élő oldaltérképből kiolvassa az összes címet, és bejelenti őket az
- * IndexNow végpontjának. Ezt a Bing, a Yandex és a Naver veszi figyelembe —
- * náluk percek alatt indexelnek. **A Google nem vesz részt az IndexNow-ban**,
+ * IndexNow-t támogató keresőknek. **A Google nem vesz részt az IndexNow-ban**,
  * ott az oldaltérkép `lastmod` mezője és a belső linkelés dolgozik helyettünk.
  *
  * Használat:
@@ -12,11 +11,23 @@
  *
  * A kulcsot a `public/<kulcs>.txt` fájl teszi ellenőrizhetővé; a fájlnak és a
  * tartalmának meg kell egyeznie a kulccsal.
+ *
+ * A Bing (és rajta keresztül az `api.indexnow.org`) addig `403
+ * UserForbiddedToAccessSite` hibával válaszol, amíg a domain nincs
+ * hitelesítve a Bing Webmaster Toolsban — a kulcsfájl önmagában nem elég
+ * neki. A Yandex ugyanezt a kulcsot elfogadja. Ezért a szkript több
+ * végpontnak is bejelent, és csak akkor jelez hibát, ha egyik sem fogadta el.
  */
 
 const HOST = "temakft.hu";
 const KEY = "730faf364e55dcb5a957b43164e404cd";
 const ORIGIN = `https://${HOST}`;
+
+/** Az `api.indexnow.org` elvileg továbbítja a többi résztvevőnek is. */
+const ENDPOINTS = [
+  { name: "api.indexnow.org (Bing, Seznam)", url: "https://api.indexnow.org/indexnow" },
+  { name: "Yandex", url: "https://yandex.com/indexnow" },
+];
 
 async function urlsFromSitemap() {
   const res = await fetch(`${ORIGIN}/sitemap.xml`, {
@@ -25,6 +36,36 @@ async function urlsFromSitemap() {
   if (!res.ok) throw new Error(`Az oldaltérkép nem érhető el: HTTP ${res.status}`);
   const xml = await res.text();
   return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+}
+
+async function submit(endpoint, urlList) {
+  const body = {
+    host: HOST,
+    key: KEY,
+    keyLocation: `${ORIGIN}/${KEY}.txt`,
+    urlList,
+  };
+
+  try {
+    const res = await fetch(endpoint.url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify(body),
+    });
+
+    // 200 = elfogadva, 202 = elfogadva, a kulcs ellenőrzése folyamatban.
+    if (res.status === 200 || res.status === 202) {
+      console.log(`  ${endpoint.name}: elfogadva (HTTP ${res.status})`);
+      return true;
+    }
+
+    const text = (await res.text().catch(() => "")).trim().slice(0, 200);
+    console.warn(`  ${endpoint.name}: elutasítva — HTTP ${res.status} ${text}`);
+    return false;
+  } catch (err) {
+    console.warn(`  ${endpoint.name}: nem elérhető — ${err.message}`);
+    return false;
+  }
 }
 
 async function main() {
@@ -38,28 +79,18 @@ async function main() {
     return;
   }
 
-  // Az IndexNow egy kérésben legfeljebb 10 000 címet fogad el — ez bőven elég.
-  const body = {
-    host: HOST,
-    key: KEY,
-    keyLocation: `${ORIGIN}/${KEY}.txt`,
-    urlList,
-  };
+  console.log(`IndexNow: ${urlList.length} cím bejelentése.`);
 
-  const res = await fetch("https://api.indexnow.org/indexnow", {
-    method: "POST",
-    headers: { "Content-Type": "application/json; charset=utf-8" },
-    body: JSON.stringify(body),
-  });
+  const results = [];
+  for (const endpoint of ENDPOINTS) {
+    results.push(await submit(endpoint, urlList));
+  }
 
-  // 200 = elfogadva, 202 = elfogadva, a kulcs ellenőrzése folyamatban.
-  if (res.status === 200 || res.status === 202) {
-    console.log(`IndexNow: ${urlList.length} cím bejelentve (HTTP ${res.status}).`);
+  if (results.some(Boolean)) {
     return;
   }
 
-  const text = await res.text().catch(() => "");
-  console.error(`IndexNow hiba: HTTP ${res.status} ${text}`.trim());
+  console.error("Egyik végpont sem fogadta el a bejelentést.");
   process.exitCode = 1;
 }
 

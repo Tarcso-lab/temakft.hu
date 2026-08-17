@@ -1,0 +1,39 @@
+# Minden `main` ágra történő feltöltés után bejelenti a címeket az IndexNow-nak.
+#
+# A lépés megvárja, hogy a Cloudflare kiadja az új verziót (az építés 2–4 perc),
+# és csak utána jelent be — így a keresők már a friss tartalmat kérik le.
+#
+# Fontos: az IndexNow-t a Bing, a Yandex és a Naver használja. A Google nem vesz
+# részt benne; ott az oldaltérkép `lastmod` mezője és a belső linkelés dolgozik.
+
+name: IndexNow bejelentés
+
+on:
+  push:
+    branches: [main]
+    paths:
+      # Csak akkor fusson, ha tényleg a tartalom vagy az oldalak változtak.
+      - "src/**"
+      - "public/**"
+  workflow_dispatch:
+
+# Ha gyors egymásutánban több feltöltés érkezik, elég a legutolsó után bejelenteni.
+concurrency:
+  group: indexnow
+  cancel-in-progress: true
+
+jobs:
+  bejelentes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Várakozás a Cloudflare kiadására
+        run: sleep 300
+
+      - name: Címek bejelentése
+        run: node scripts/indexnow.mjs

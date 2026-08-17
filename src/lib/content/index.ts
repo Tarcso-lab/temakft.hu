@@ -10,6 +10,20 @@ export * from "./types";
 export { segments, articles };
 export { articleCategories } from "./articles";
 
+/**
+ * A tartalom általános utolsó felülvizsgálati dátuma (ÉÉÉÉ-HH-NN).
+ *
+ * Ez kerül az oldaltérkép `lastmod` mezőjébe azoknál az oldalaknál, amelyeknek
+ * nincs saját `updatedAt` értékük. **Kézzel kell átírni**, amikor a tartalmon
+ * érdemi változtatás történik — szándékosan nem a build ideje, mert akkor
+ * minden kiadás után minden oldal „módosultnak" látszana, és a Google előbb-
+ * utóbb figyelmen kívül hagyná a mezőt.
+ *
+ * Egyetlen oldal módosításakor ne ezt írd át, hanem az adott oldal saját
+ * `updatedAt` mezőjét.
+ */
+export const CONTENT_REVISION = "2026-08-15";
+
 export const hubs: HubPage[] = [uzemeltetesHub, tervezesHub, rendszerekHub, projektekHub];
 
 export const allServicePages: ServicePage[] = [

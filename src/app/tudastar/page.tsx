@@ -23,6 +23,13 @@ export const metadata: Metadata = buildMetadata({
   ],
 });
 
+// A hírcsatorna felfedezhetővé tétele: enélkül a keresők és az olvasók csak
+// akkor találják meg, ha ismerik a pontos címét.
+metadata.alternates = {
+  ...metadata.alternates,
+  types: { "application/rss+xml": [{ url: "/tudastar/rss.xml", title: "TEMA — Tudástár" }] },
+};
+
 export default function Page() {
   const [featured, ...rest] = articles;
 

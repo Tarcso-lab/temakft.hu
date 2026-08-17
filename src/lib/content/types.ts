@@ -30,6 +30,13 @@ export type ServicePage = {
   /** Kapcsolódó oldalak URL-jei a belső linkeléshez. */
   related: string[];
   icon: string;
+  /**
+   * Mikor változott utoljára az oldal tartalma (ÉÉÉÉ-HH-NN).
+   * Ez kerül az oldaltérkép `lastmod` mezőjébe. Ha nincs megadva, a
+   * `CONTENT_REVISION` alapérték érvényes. Szerkesztéskor írd át — a Google
+   * csak akkor veszi figyelembe ezt a mezőt, ha megbízhatóan pontos.
+   */
+  updatedAt?: string;
 };
 
 export type HubPage = {
@@ -42,6 +49,8 @@ export type HubPage = {
   lead: string;
   intro: ContentBlock[];
   faq: FaqItem[];
+  /** Lásd a `ServicePage.updatedAt` leírását. */
+  updatedAt?: string;
 };
 
 export type SegmentPage = {
@@ -59,6 +68,8 @@ export type SegmentPage = {
   deliverables: { title: string; text: string }[];
   body: ContentBlock[];
   faq: FaqItem[];
+  /** Lásd a `ServicePage.updatedAt` leírását. */
+  updatedAt?: string;
 };
 
 export type Article = {

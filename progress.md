@@ -65,7 +65,7 @@ oldaltérkép.
 | `docs/seo-kutatas.md` | A DataForSEO piackutatás teljes eredménye |
 | `docs/google-cegprofil.md` | Cégprofil-leírás (724 karakter) + beállítási útmutató |
 | `docs/uj-cikk.md` | Hogyan írj új tudástári cikket, másolható sablonnal |
-| `docs/deploy.md` | Élesítési útmutató — **elavult, a Vercel-utat írja le** |
+| `docs/deploy.md` | Élesítés és üzemeltetés Cloudflare-en, hibakereséssel |
 | `docs/resend-teszt.ps1` | E-mail küldés ellenőrzése egy paranccsal |
 | `docs/dfs-teszt.ps1` | DataForSEO hozzáférés ellenőrzése |
 | `indit.bat` | A fejlesztői szerver indítása duplakattintással |
@@ -178,7 +178,6 @@ pontját frissíteni kell.**
 
 | Tétel | Megjegyzés |
 |---|---|
-| `docs/deploy.md` | Elavult: a Vercel-utat írja le. Átírandó a Cloudflare-re |
 | `sites_count` oszlop | Az adatbázisban van, de a kód sosem tölti ki — a helyszínek számát a `details.site_scope` mezőbe teszi |
 | `/projektek/atadas-uzembe-helyezes` | Nincs képe — egy letöltési URL hibás volt |
 | Mobil menü gombfelirata | „Részletes ajánlatot kérek" maradt, a hero „Ajánlatot kérek" |

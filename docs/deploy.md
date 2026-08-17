@@ -1,203 +1,258 @@
-# Élesítés — a weboldal kitétele a temakft.hu címre
+# Élesítés és üzemeltetés — Cloudflare Workers
 
-## A lényeg elöljáróban
+**A weboldal jelenleg élesben van:** [https://temakft.hu](https://temakft.hu),
+Cloudflare Workersen. Ez a dokumentum egyrészt leírja, hogyan áll össze a
+rendszer, másrészt segít, ha valamit újra kell csinálni vagy hiba lép fel.
 
-**A Rackhost sima (PHP-s) tárhelyén ez a weboldal nem fut.** Nem hiba, hanem
-technológiai különbség: a PHP-tárhelyek nem futtatnak Node.js alkalmazást, ez az
-oldal viszont Node.js-t igényel. Konkrétan azért, mert:
-
-- az űrlapok szerveroldalon dolgoznak fel (adatbázisba írás + e-mail küldés),
-- a megosztási képek futásidőben generálódnak.
-
-**A domain viszont maradhat a Rackhostnál.** Csak a DNS-beállításokat kell
-átirányítani a tárhelyszolgáltatóra. A domain tulajdonjoga, a hosszabbítás és a
-kezelőfelület minden marad, ahol van.
+> A korábbi változat a Vercel-utat írta le. A Vercel ingyenes csomagja céges
+> weboldalra a feltételei szerint nem használható (kereskedelmi felhasználás
+> Pro csomagot igényel, ~$20/hó), ezért esett a választás a Cloudflare-re,
+> ahol ez a méret elfér az ingyenes keretben.
 
 ---
 
-## Melyik utat válasszuk?
+## 1. A rendszer felépítése
 
-| | **Vercel** *(ajánlott)* | **Rackhost VPS** |
+| Réteg | Hol van | Megjegyzés |
 |---|---|---|
-| Költség | 0 Ft ezen a méreten | Havidíjas VPS |
-| Beállítás | ~30 perc | Fél–egy nap |
-| Karbantartás | Nincs | Szerverfrissítés, biztonsági javítások |
-| SSL (https) | Automatikus, megújul magától | Kézzel kell beállítani |
-| Frissítés | Egy paranccsal | Kézi másolás, újraindítás |
-| Sebesség | Európai CDN-ről szolgál ki | Egy szerverről |
+| Domain regisztráció | **Rackhost** | Itt marad, itt hosszabbítod |
+| DNS | **Cloudflare** | A névszerverek a Cloudflare-re mutatnak |
+| Weboldal | **Cloudflare Workers** | `temakft-hu` nevű Worker |
+| Adatbázis | **Supabase** | Frankfurt, `leads` tábla |
+| E-mail küldés | **Resend** | `noreply@temakft.hu` feladóval |
+| Levelezés (bejövő) | **Rackhost** | MX rekordok, független a weboldaltól |
 
-A Vercel a Next.js fejlesztőjének a szolgáltatása, erre az alkalmazástípusra
-találták ki. Ezen a méreten (napi néhány száz látogató) az ingyenes csomag bőven
-elég, és nem igényel kártyát.
+**Miért nem elég egy sima PHP-s tárhely?** Mert az oldal Node.js-t igényel: az
+űrlapok szerveroldalon dolgoznak fel (adatbázisba írás + e-mail küldés), és a
+megosztási képek futásidőben generálódnak.
 
-VPS akkor indokolt, ha kifejezetten cél, hogy minden magyar szolgáltatónál és
-egy helyen legyen. Cserébe a szerver karbantartása a tiéd.
+**Hogyan fut a Next.js a Cloudflare-en?** Az `@opennextjs/cloudflare` adapter
+fordítja Worker formátumra. A konfiguráció a `wrangler.jsonc` és az
+`open-next.config.ts` fájlban van.
 
 ---
 
-## A. út — Vercel (ajánlott)
+## 2. Napi használat
 
-### 1. Fiók
-
-Regisztrálj a [vercel.com](https://vercel.com) oldalon. GitHub-fiókkal a
-legegyszerűbb, de e-mailes regisztráció is működik.
-
-### 2. A projekt feltöltése
-
-**Ha nincs GitHub-fiókod** — a legrövidebb út, a projektmappából:
+**Élesítés:** minden `git push` a `main` ágra automatikusan új építést és
+élesítést indít. Az építés 2–4 perc.
 
 ```bash
-npx vercel
+git push origin main
 ```
 
-Első futtatáskor bejelentkeztet, majd feltesz néhány kérdést (projekt neve,
-mappa). A végén kapsz egy `*.vercel.app` címet — ezen már működik az oldal.
-
-Éles kiadás:
+**Kézi élesítés a saját gépről** (ritkán kell, a CI megkerülésével):
 
 ```bash
-npx vercel --prod
+npm run cf:deploy
 ```
 
-**Ha van GitHub-fiókod** — hosszabb távon ez a jobb: feltöltöd a projektet egy
-(privát) tárolóba, a Vercelen összekapcsolod, és onnantól minden módosítás
-automatikusan élesedik.
+Első alkalommal bejelentkeztet a böngészőn keresztül. Figyelj rá, hogy ilyenkor
+a **helyi** kódot tölti fel — érdemes előtte mindent commitolni.
 
-### 2b. Beállítások a projekt létrehozásakor
+**Helyi próba valódi Workers környezetben** (nem a `next dev`, hanem az, ami
+élesben is futni fog):
 
-A Vercel a legtöbb mezőt magától kitölti. Amit **nem kell** átállítani:
+```bash
+npm run cf:preview
+```
 
-| Mező | Érték | Megjegyzés |
+Ez azért hasznos, mert néhány dolog máshogy viselkedik a Workersen, mint a
+fejlesztői szerveren.
+
+---
+
+## 3. Környezeti változók — **a leggyakoribb hibaforrás**
+
+A Cloudflare **két külön helyen** tárolja őket, és a kettő nem cserélhető fel.
+Ez a projekt élesítésénél a legtöbb időt elvivő probléma volt.
+
+| Hely | Mi kerül ide | Mikor él |
 |---|---|---|
-| Framework Preset | `Next.js` | Magától felismeri |
-| Root Directory | `./` | A projekt a repó gyökerében van |
-| Build Command | *(alapértelmezett)* | `next build` |
-| Output Directory | *(alapértelmezett)* | Ne írd felül |
-| Install Command | *(alapértelmezett)* | `npm install` |
-| Node.js Version | *(alapértelmezett)* | 20 vagy újabb kell, az alap megfelel |
+| Worker → **Settings → Build** (*Build variables and secrets*) | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` | **csak az építés idején** |
+| Worker → **Settings → Variables and Secrets** | `RESEND_API_KEY`, `IP_HASH_SALT`, `LEAD_EMAIL_FROM`, `LEAD_EMAIL_TO` | **a kérések kiszolgálásakor** |
 
-**Amit viszont muszáj:** a környezeti változók megadása még az első építés
-előtt — lásd a következő pontot.
+**Miért ez a felosztás?** A `NEXT_PUBLIC_` előtagú változókat a Next.js
+beégeti a lefordított kódba, tehát az építés előtt kell megadni őket — utólag
+csak új építéssel jutnak érvényre. A többit a Worker futás közben olvassa,
+ezekhez nem kell újraépítés, csak új verzió telepítése.
 
-### 3. Környezeti változók beállítása
+**Hogyan ismered fel, melyik szekcióban vagy?** Ahol **API token** mezőt látsz
+a közelben, az a build-szekció.
 
-Ez a leggyakoribb hibaforrás: **a `.env.local` fájl szándékosan nem kerül fel**
-a GitHubra és a szerverre sem. Az értékeket a Vercel felületén kell megadni.
+**Ellenőrzés egy paranccsal** — ez megmondja, mit lát a futó Worker:
 
-**Hat változó kell.** A projekt létrehozásakor az „Environment Variables"
-szakaszban add meg őket, még az első építés előtt:
+```bash
+npx wrangler secret list
+```
 
-| Név | Honnan | Megjegyzés |
+Ha üres listát ad, a futásidejű változók hiányoznak. Beállításuk:
+
+```bash
+npx wrangler secret put RESEND_API_KEY
+```
+
+A parancs bekéri az értéket. Ugyanígy a többi háromnál. A `.env.local` fájlból
+másolható minden, **két kivétellel**: az `IP_HASH_SALT`-nak élesben egyedi
+értéket kell adni (a fejlesztőit ne használd), a `LEAD_EMAIL_FROM` pedig
+`TEMA weboldal <noreply@temakft.hu>`.
+
+A `SUPABASE_SERVICE_ROLE_KEY` **nem kell.** Az adatbázison olyan szabály van,
+ami a publikus kulccsal is engedi a beszúrást (de az olvasást nem).
+
+---
+
+## 4. Az előre legenerált oldalak gyorsítótára
+
+Az 51 tartalmi oldal építéskor előre elkészül. Ezek **nem** a statikus fájlok
+közé kerülnek, hanem egy külön inkrementális gyorsítótárba, amit be kell kötni
+— ez az `open-next.config.ts` fájlban történik:
+
+```ts
+incrementalCache: staticAssetsIncrementalCache
+```
+
+**Enélkül élesben az oldalak nagy része nem érhető el**, miközben helyben
+minden működik (a helyi gépen van fájlrendszer, a Cloudflare-en nincs). Ez a
+hiba egyszer már előfordult, ezért szerepel itt külön.
+
+---
+
+## 5. Ha a domaint újra kellene kötni
+
+### 5.1 Előkészítés — a levelezés a tét
+
+Amint a névszerverek a Cloudflare-re mutatnak, a Rackhost DNS-zónája
+érvényét veszti. Ami nincs átvezetve, az leáll — a legveszélyesebb az e-mail.
+
+**Ezeknek a rekordoknak mind meg kell lenniük a Cloudflare zónájában, még a
+névszerver-váltás előtt:**
+
+| Hosztnév | Típus | Mire való |
 |---|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | `.env.local` | Változatlanul |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `.env.local` | Változatlanul |
-| `RESEND_API_KEY` | `.env.local` | Változatlanul |
-| `LEAD_EMAIL_FROM` | `.env.local` | Változatlanul |
-| `LEAD_EMAIL_TO` | `.env.local` | Változatlanul |
-| `IP_HASH_SALT` | **új, egyedi érték** | A helyi fejlesztői értéket ne használd élesben |
+| `temakft.hu` | MX (10, 20) | Bejövő levelezés (Rackhost) |
+| `temakft.hu` | TXT | SPF |
+| `temakft.hu` | TXT | Apple-domain-hitelesítés |
+| `_dmarc` | TXT | DMARC szabály |
+| `resend._domainkey` | TXT | Resend DKIM — enélkül nem megy ki űrlap-értesítés |
+| `k2._domainkey`, `k3._domainkey` | CNAME | Mailchimp DKIM |
+| `send` | MX + TXT | A Resend visszaútja (Amazon SES) |
 
-> **Gyorsítás:** a Vercel mezőjébe a `.env.local` fájl tartalma egyben is
-> beilleszthető — felismeri a `NEV=ertek` sorokat, és szétbontja őket. A
-> `#` kezdetű megjegyzéssorokat nyugodtan bemásolhatod, azokat kihagyja.
-> Utána csak az `IP_HASH_SALT` értékét írd át.
+A Cloudflare a zóna hozzáadásakor beolvassa a meglévő rekordokat, de **a
+DKIM-eket gyakran kihagyja** — tételesen vesd össze a két listát.
 
-**Miért kell az építés ELŐTT megadni?** A `NEXT_PUBLIC_` előtagú változók
-beépülnek a lefordított kódba. Ha utólag adod hozzá őket, a már elkészült
-build nem látja őket — ilyenkor a Deployments fülön újra kell indítani egy
-építést („Redeploy").
+### 5.2 Névszerver-váltás a Rackhostnál
 
-**A `SUPABASE_SERVICE_ROLE_KEY` nem kell.** Az adatbázison olyan biztonsági
-szabály van, ami a publikus kulccsal is engedi a beszúrást (de az olvasást nem),
-így a szolgáltatói kulcs nélkül is működik minden.
+A Rackhostnál nem „törölni" kell a névszervereket, hanem **lecserélni**. Az
+ügyfélkapun a domain adatlapján keresd a névszerver-módosítást. Ha nem
+találod, egy ügyfélszolgálati levél elég — rutinkérés.
 
-### 3b. Kiszolgálási régió — érdemes átállítani
+A jelenlegi névszerverek: `chuck.ns.cloudflare.com`, `mckinley.ns.cloudflare.com`
+(a sajátodat mindig a Cloudflare felületéről másold).
 
-Alapértelmezetten a Vercel az Egyesült Államokban futtatja a szerveroldali
-kódot, az adatbázis viszont Frankfurtban van. Így minden űrlapbeküldés
-óceánon átívelő oda-vissza utat tenne meg.
+### 5.3 A domain rákötése a Workerre
 
-**Settings → Functions → Function Region → Frankfurt (`fra1`)**
+A Worker oldalán: **Domains & Routes → Add Custom Domain** → `temakft.hu`.
 
-Ez néhány száz ezredmásodpercet spórol beküldésenként, és a magyar látogatókhoz
-is közelebb van.
+Ha ezt a hibát kapod:
 
-### 4. A domain hozzáadása
+> *Hostname 'temakft.hu' already has externally managed DNS records*
 
-A Vercelen: **Settings → Domains → Add**, írd be: `temakft.hu`.
+…akkor a Cloudflare **DNS** fülén előbb törölni kell az adott hosztnévhez
+tartozó `A` vagy `CNAME` rekordot. **Csak azt** — a TXT és MX rekordokhoz ne
+nyúlj. A Cloudflare ezután magától létrehozza a saját rekordját és kiállítja a
+tanúsítványt.
 
-A Vercel ezután kiírja, milyen DNS-rekordokat kell felvenni. Két rekord kell:
+### 5.4 A `www` átirányítása
 
-- egy **A rekord** a `temakft.hu` címhez,
-- egy **CNAME rekord** a `www` alcímhez.
+A weboldal kanonikus címe **www nélküli**. A www-s változatot 301-gyel
+irányítjuk át. Ez **nem az alkalmazásban** van megoldva, és ez szándékos:
 
-> A pontos értékeket **a Vercel felületéről másold ki**, ne innen — ezek
-> időnként változnak, és a rossz IP-cím miatt egyszerűen nem fog működni.
+- a `next.config.ts` `redirects()` gazdanév-feltétele a Workers környezetben
+  nem lép működésbe;
+- a `proxy.ts` (a Next.js 16-ban átnevezett middleware) Node.js
+  futtatókörnyezetet igényel, amit az OpenNext nem támogat;
+- a Workers `_redirects` fájlja nem tud gazdanév szerint illeszteni.
 
-### 5. DNS a Rackhostnál
+Ezért a Cloudflare zóna szintjén készül, ami amúgy is kedvezőbb: le sem
+futtatja a Workert.
 
-Lépj be a Rackhost ügyfélkapujába → a domain → **DNS-kezelés**.
+**1. DNS-rekord** — `AAAA`, név `www`, tartalom `100::`, **Proxied**.
+Ez egy szándékosan „üres" cím; csak arra kell, hogy a kérés a Cloudflare-ig
+eljusson.
 
-1. Ha van meglévő `A` rekord a `@` (vagy üres) névhez, azt **módosítsd** a
-   Vercel által megadott IP-címre. Ha nincs, vegyél fel újat.
-2. Vegyél fel egy `CNAME` rekordot `www` névvel, a Vercel által megadott
-   értékre.
-3. **Az MX rekordokhoz ne nyúlj**, ha van e-mail szolgáltatás a domainen — azok
-   a levelezést kezelik, és függetlenek a weboldaltól.
+**2. Rules → Redirect Rules**, a szabály tartalma:
 
-A változás jellemzően néhány perc alatt, néha órák alatt terjed szét. A Vercel
-felületén látszik, amikor észleli. Az SSL-tanúsítványt utána magától kiállítja.
+| Mező | Érték |
+|---|---|
+| Feltétel | `(http.host eq "www.temakft.hu")` |
+| Művelet | URL redirect, típus **Dynamic** |
+| Célcím | `concat("https://temakft.hu", http.request.uri.path)` |
+| Státusz | 301 |
+| Query string | megőrizve |
 
-### 6. Ellenőrzés élesítés után
+> **Figyelem, könnyű elrontani:** a felületen a feltétel mezőjében a
+> *Hostname* mezőt kell választani, nem az *URI Path*-t. Ha az útvonalat
+> hasonlítod a hosztnévhez, a feltétel soha nem teljesül, a kérés a `100::`
+> címre fut, és **522-es hibát** kapsz.
 
-Először a Vercel ideiglenes címén (`*.vercel.app`), majd a saját domainen:
+---
 
-- [ ] A főoldal betölt, a menü és a képek rendben megjelennek
-- [ ] **Küldj egy próba-ajánlatkérést** → megérkezik-e az e-mail
-      (ez ellenőrzi egyszerre a Supabase- és a Resend-beállítást)
-- [ ] `https://temakft.hu` betölt, és a `www` változat is átirányít
-- [ ] A lakat ikon látszik (érvényes SSL)
+## 6. Ellenőrzés élesítés után
+
+- [ ] `https://temakft.hu` betölt, lakat ikon látszik
+- [ ] `https://www.temakft.hu` átirányít a www nélküli címre — **aloldallal is
+      próbáld**, nem csak a főoldallal
 - [ ] `https://temakft.hu/sitemap.xml` és `/robots.txt` elérhető
+- [ ] A képek megjelennek
+- [ ] **Küldj egy próba-ajánlatkérést**, és nézd meg, megérkezik-e az e-mail
 
-> **Az oldaltérképet csak akkor küldd be a Search Console-ba, ha a saját
-> domain már él.** A benne szereplő címek `temakft.hu`-ra mutatnak, tehát a
-> `*.vercel.app` címen még nem az igazi végleges állapotot tükrözik.
-
-Ha a próbabeküldés nem küld e-mailt, a hiba okát a Supabase `leads` táblájának
-`email_error` oszlopában találod — a megkeresés maga ilyenkor is elmentődik.
+Az utolsó pont ellenőrzi egyszerre a Supabase- és a Resend-beállítást.
 
 ---
 
-## B. út — Rackhost VPS
+## 7. Hibakeresés
 
-Ha mindenképp Rackhostnál maradna minden, VPS csomag kell (nem sima tárhely).
-A telepítés lépései nagy vonalakban:
+### Nem érkezik e-mail az űrlapokról
 
-1. Node.js 20+ telepítése a szerverre.
-2. A projekt felmásolása, `npm ci`, majd `npm run build`.
-3. Az alkalmazás futtatása folyamatosan — PM2 vagy systemd szolgáltatásként
-   (`npm start`, alapértelmezetten a 3000-es porton).
-4. Nginx beállítása fordított proxyként a 80/443 portról a 3000-esre.
-5. SSL-tanúsítvány Let's Encrypt-tel (certbot), automatikus megújítással.
-6. A környezeti változók beállítása a szerveren.
+A megkeresés ilyenkor is elmentődik — a kód szándékosan csak akkor jelez hibát
+a látogatónak, ha sem a mentés, sem az értesítés nem sikerült. **A hiba okát a
+Supabase `leads` táblájának `email_error` oszlopában találod** (Table Editor,
+legfelső sor).
 
-Ez működőképes, de a szerver frissítése, a biztonsági javítások és a
-tanúsítványmegújítás figyelése a tiéd marad.
+| Amit ott látsz | Mit jelent |
+|---|---|
+| `RESEND_API_KEY nincs beállítva` | A kulcs nem a futásidejű szekcióban van — lásd a 3. pontot |
+| „You can only send testing emails to your own email address" | A feladó még `onboarding@resend.dev`; állítsd `noreply@temakft.hu`-ra |
+| Domain- vagy jogosultsági hiba | A Resendben a `temakft.hu` hitelesítése vagy a kulcs domain-korlátozása a gond |
+| üres, és `email_sent` igaz | Kiment. Nézd meg a spam mappát is |
+
+### Az oldalak nagy része nem érhető el élesben
+
+Az inkrementális gyorsítótár nincs bekötve — lásd a 4. pontot.
+
+### A weboldal nem jön be, de a szerver válaszol
+
+Valószínűleg a saját géped DNS-gyorsítótára őriz egy régi bejegyzést:
+
+```bash
+ipconfig /flushdns
+```
+
+Chrome-ban a `chrome://net-internals/#dns` oldalon a **Clear host cache** gomb.
 
 ---
 
-## Amit élesítés előtt még érdemes elintézni
+## 8. Költségek
 
-1. **Jogi szövegek véglegesítése** — az ÁSZF, a garanciális feltételek és az
-   adatkezelési tájékoztató szögletes zárójeles helyei, valamint a jogi
-   átnézés. Amíg ez nincs meg, figyelmeztető sáv látszik az oldalak tetején.
-2. **`IP_HASH_SALT` cseréje** egyedi értékre.
-3. **Székhely kérdése** — az elektronikus kereskedelmi törvény előírja a
-   szolgáltató székhelyének feltüntetését. Jelenleg kérésre nincs kint.
+| Tétel | Havidíj |
+|---|---|
+| Cloudflare Workers | 0 Ft ezen a méreten |
+| Supabase | 0 Ft ezen a méreten |
+| Resend | 0 Ft (napi 100 levélig) |
+| Domain (Rackhost) | a szokásos éves díj |
 
-## Élesítés után
-
-1. **Google Search Console**: tulajdon hitelesítése, `sitemap.xml` beküldése.
-2. **Google Cégprofil** létrehozása (lásd `docs/google-cegprofil.md`).
-3. **Saját domain a Resendben** — a „Domains" menüben hitelesítve a
-   `temakft.hu` domaint, a `LEAD_EMAIL_FROM` átírható `noreply@temakft.hu`
-   címre. Ettől ritkábban kerül spambe az értesítés.
+A Worker feltöltési mérete jelenleg **2,3 MB tömörítve**, az ingyenes csomag
+korlátja 3 MB. Ha ez szűkössé válna, a legnagyobb tartalék a képek további
+optimalizálásában van — bár azok a statikus fájlok közé kerülnek, nem a
+Worker kódjába.

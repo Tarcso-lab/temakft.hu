@@ -3,27 +3,27 @@ import type { HubPage, ServicePage } from "./types";
 export const projektekHub: HubPage = {
   key: "projektek",
   slug: "/projektek",
-  h1: "Generálkivitelezés és műszaki projektmenedzsment",
-  metaTitle: "Generálkivitelezés Budapest | TEMA Menedzsment",
+  h1: "Műszaki koordináció és projektmenedzsment",
+  metaTitle: "Műszaki koordináció, projektmenedzsment | TEMA",
   metaDescription:
-    "Generálkivitelezés Budapesten és Pest vármegyében: építőmesteri munkák, gépészet, villamosság, burkolás, festés — minden szakág egy szerződésben.",
+    "Műszaki koordináció és projektmenedzsment Budapesten és Pest vármegyében: szakági egyeztetés, ütemterv, minőségellenőrzés, dokumentált átadás-átvétel.",
   keywords: [
-    "generálkivitelezés",
-    "generálkivitelező Budapest",
-    "teljes körű kivitelezés",
-    "kulcsrakész kivitelezés",
-    "felújítás kivitelezés",
+    "műszaki koordináció",
     "műszaki projektmenedzsment",
+    "szakági koordináció",
+    "kivitelezés koordináció",
+    "átadás-átvétel dokumentáció",
+    "generálkivitelezés",
   ],
-  lead: "Generálkivitelezőként a teljes építési feladatot visszük: az építőmesteri munkáktól a gépészeten és a villamosságon át a burkolásig és a festésig. Egy szerződés, egy határidő, egy felelős — Önnek nem kell tíz szakiparral egyeztetnie.",
+  lead: "Ha egy munka több szakágat érint, a legtöbb csúszás nem a kivitelezésben keletkezik, hanem a szakágak között. A műszaki koordináció pontosan ezt a rést zárja be: egy felelős fogja össze az ütemtervet, a helyszíni egyeztetést és a dokumentációt — Önnek nem kell tíz szakiparral külön tárgyalnia.",
   intro: [
     {
       type: "p",
-      text: "A generálkivitelezés lényege, hogy a megrendelő egyetlen szerződést köt, és a kész, működő eredményt veszi át. Nem neki kell kőművest, gépészt, villanyszerelőt, burkolót, festőt és asztalost keresnie, majd összehangolnia őket — ez a mi feladatunk, és ez az, amiért a felelősség is nálunk marad.",
+      text: "A műszaki koordináció lényege, hogy a megrendelő egyetlen felelőssel tárgyal, és a kész, működő eredményt veszi át. Nem neki kell kőművest, gépészt, villanyszerelőt, burkolót, festőt és asztalost keresnie, majd összehangolnia őket — ez a mi feladatunk, és ez az, amiért a felelősség is nálunk marad.",
     },
     {
       type: "p",
-      text: "Ez különbözteti meg a generálkivitelezést a szakági vállalkozástól. A szakági kivitelező a saját munkájáért felel; ha a burkoló a még be nem húzott kábel fölé dolgozik, az nem az ő gondja. A generálkivitelező viszont a teljes műszaki tartalomért felel, beleértve azt is, hogy a szakágak a megfelelő sorrendben és a megfelelő időben dolgozzanak.",
+      text: "Ez különbözteti meg a koordinált projektet a szakági vállalkozástól. A szakági kivitelező a saját munkájáért felel; ha a burkoló a még be nem húzott kábel fölé dolgozik, az nem az ő gondja. A koordinátor viszont a teljes műszaki tartalomért felel, beleértve azt is, hogy a szakágak a megfelelő sorrendben és a megfelelő időben dolgozzanak.",
     },
     { type: "h2", text: "Milyen szakágakat viszünk?" },
     {
@@ -57,13 +57,13 @@ export const projektekHub: HubPage = {
     },
     {
       type: "p",
-      text: "Elsősorban Budapesten és Pest vármegyében dolgozunk, ahol a helyszíni jelenlét napi szinten biztosítható — a generálkivitelezésnél ugyanis nem az ajánlati ár, hanem a folyamatos helyszíni kontroll dönti el a végeredményt.",
+      text: "Elsősorban Budapesten és Pest vármegyében dolgozunk, ahol a helyszíni jelenlét napi szinten biztosítható — egy több szakágas projektnél ugyanis nem az ajánlati ár, hanem a folyamatos helyszíni kontroll dönti el a végeredményt.",
     },
   ],
   faq: [
     {
       q: "Tényleg mindent vállalnak, vagy csak a villamos részt?",
-      a: "Generálkivitelezésben a teljes műszaki tartalmat vállaljuk: építőmesteri munkák, gépészet, villamosság, szárazépítés, burkolás, festés, nyílászárók, asztalos- és belsőépítészeti munkák. Az erős- és gyengeáramú, valamint az automatizálási munkákat saját szakembereink végzik, a többi szakágat bevizsgált alvállalkozói körrel, a mi koordinációnk mellett.",
+      a: "Teljes körű megbízásnál a teljes műszaki tartalmat vállaljuk: építőmesteri munkák, gépészet, villamosság, szárazépítés, burkolás, festés, nyílászárók, asztalos- és belsőépítészeti munkák. Az erős- és gyengeáramú, valamint az automatizálási munkákat saját szakembereink végzik — ez a cég szakmai magja —, a többi szakágat bevizsgált alvállalkozói körrel, a mi koordinációnk és minőségellenőrzésünk mellett.",
     },
     {
       q: "Kisebb projekteket is vállalnak?",

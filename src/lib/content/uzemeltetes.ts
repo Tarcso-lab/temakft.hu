@@ -3,18 +3,18 @@ import type { HubPage, ServicePage } from "./types";
 export const uzemeltetesHub: HubPage = {
   key: "uzemeltetes",
   slug: "/uzemeltetes",
-  h1: "Műszaki épületüzemeltetés és karbantartás",
-  metaTitle: "Műszaki épületüzemeltetés Budapest | TEMA",
+  h1: "Létesítményüzemeltetés és műszaki karbantartás",
+  metaTitle: "Létesítményüzemeltetés Budapest | TEMA",
   metaDescription:
-    "Műszaki épületüzemeltetés irodaházaknak, ipari létesítményeknek és társasházaknak: villamos és gyengeáramú üzemeltetés, karbantartás, hibaelhárítás.",
+    "Létesítményüzemeltetés és facility management irodaházaknak, ipari létesítményeknek és társasházaknak: karbantartási szerződés, hibaelhárítás, felülvizsgálat.",
   keywords: [
-    "műszaki épületüzemeltetés",
-    "épületüzemeltetés",
     "létesítményüzemeltetés",
-    "facility management műszaki",
-    "villamos üzemeltetés",
-    "épületüzemeltetés Budapest",
+    "facility management",
+    "épületüzemeltetés",
+    "ingatlanüzemeltetés",
+    "műszaki épületüzemeltetés",
     "karbantartási szerződés",
+    "épületüzemeltetés Budapest",
   ],
   lead: "Az épület műszaki rendszerei akkor jók, ha észre sem veszi őket. Az üzemeltetési szolgáltatásunk pontosan ezt adja: folyamatos felügyeletet, tervezett karbantartást és kiszámítható reakcióidőt — erős- és gyengeáramon egyaránt, egyetlen szerződésben.",
   intro: [

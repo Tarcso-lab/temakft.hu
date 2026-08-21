@@ -11,7 +11,7 @@ import { brands, site } from "@/lib/site";
 export const metadata: Metadata = buildMetadata({
   title: "Rólunk — TEMA Menedzsment Kft.",
   description:
-    "A TEMA Menedzsment Kft. generálkivitelezéssel és műszaki épületüzemeltetéssel foglalkozik Budapesten és Pest vármegyében. Ismerje meg a szemléletünket.",
+    "A TEMA Menedzsment Kft. létesítményüzemeltetéssel és műszaki koordinációval foglalkozik Budapesten és Pest vármegyében. Ismerje meg a szemléletünket.",
   path: "/rolunk",
   keywords: [
     "TEMA Menedzsment Kft",
@@ -59,8 +59,8 @@ export default function Page() {
                 Egy műszaki partner az épület teljes életciklusára
               </h1>
               <p className="mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-stone-400">
-                A TEMA Menedzsment Kft. generálkivitelezéssel és műszaki épületüzemeltetéssel
-                foglalkozik Budapesten és Pest vármegyében. Generálkivitelezőként a teljes építési
+                A TEMA Menedzsment Kft. létesítményüzemeltetéssel és műszaki koordinációval
+                foglalkozik Budapesten és Pest vármegyében. Kivitelezésnél a teljes építési
                 feladatot visszük — minden szakággal együtt —, szakmai magunk pedig az épületek
                 erős- és gyengeáramú, valamint automatizálási rendszere, amelyet a felméréstől a
                 hosszú távú üzemeltetésig kezelünk.
@@ -119,8 +119,8 @@ export default function Page() {
                   épület műszaki működését.
                 </p>
                 <p>
-                  Projektalapon generálkivitelezéssel és műszaki projektmenedzsmenttel is
-                  foglalkozunk. Generálkivitelezőként nem csak a villamos szakágat visszük, hanem a
+                  Projektalapon műszaki koordinációval és projektmenedzsmenttel is
+                  foglalkozunk. Ilyenkor nem csak a villamos szakágat visszük, hanem a
                   teljes építési feladatot: az építőmesteri munkáktól az épületgépészeten át a
                   szárazépítésig, a burkolásig, a festésig és a belsőépítészetig. A projektek során
                   vállaljuk a szakágak koordinációját, a kivitelezés szervezését, a dokumentáció
@@ -129,7 +129,7 @@ export default function Page() {
                 </p>
                 <p>
                   Elsősorban Budapesten és Pest vármegyében dolgozunk. Ennek gyakorlati oka van: a
-                  generálkivitelezés és az üzemeltetés minőségét egyaránt a napi helyszíni jelenlét
+                  a kivitelezés és az üzemeltetés minőségét egyaránt a napi helyszíni jelenlét
                   dönti el, és ezt csak ésszerű távolságon belül tudjuk felelősen vállalni.
                 </p>
                 <h2>Miért egy partnerrel érdemes dolgozni?</h2>

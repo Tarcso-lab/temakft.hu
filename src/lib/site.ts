@@ -14,9 +14,9 @@ export const site = {
   url: "https://temakft.hu",
   locale: "hu_HU",
 
-  tagline: "Generálkivitelezés és műszaki épületüzemeltetés — egy partner az épület teljes életciklusára",
+  tagline: "Létesítményüzemeltetés és műszaki koordináció — egy partner az épület teljes életciklusára",
   description:
-    "Generálkivitelezés és műszaki épületüzemeltetés Budapesten és Pest vármegyében: teljes körű kivitelezés minden szakággal, valamint erős- és gyengeáramú rendszerek tervezése, kivitelezése és karbantartása.",
+    "Létesítményüzemeltetés és facility management Budapesten és Pest vármegyében: szerződéses karbantartás, hibaelhárítás és érintésvédelmi felülvizsgálat, valamint erős- és gyengeáramú rendszerek tervezése és kivitelezése.",
 
   contact: {
     phone: "+36 (20) 414 0004",
@@ -117,7 +117,8 @@ export type NavItem = {
 
 export const mainNav: NavItem[] = [
   {
-    label: "Üzemeltetés",
+    label: "Létesítményüzemeltetés",
+    shortLabel: "Üzemeltetés",
     href: "/uzemeltetes",
     description: "Folyamatos műszaki működtetés, karbantartás és hibaelhárítás",
     children: [
@@ -231,7 +232,7 @@ export const mainNav: NavItem[] = [
   {
     label: "Projektek",
     href: "/projektek",
-    description: "Generálkivitelezés minden szakággal, egy felelőssel",
+    description: "Műszaki koordináció és projektmenedzsment, egy felelőssel",
     children: [
       {
         label: "Generálkivitelezés",

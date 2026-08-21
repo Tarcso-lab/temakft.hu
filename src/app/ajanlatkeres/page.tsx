@@ -12,7 +12,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = buildMetadata({
   title: "Ajánlatkérés — kivitelezés és üzemeltetés",
   description:
-    "Kérjen kötelezettségmentes árajánlatot generálkivitelezésre, felújításra, műszaki üzemeltetésre vagy karbantartásra. Válasz egy munkanapon belül.",
+    "Kérjen kötelezettségmentes árajánlatot létesítményüzemeltetésre, karbantartási szerződésre, felújításra vagy kivitelezésre. Válasz egy munkanapon belül.",
   path: "/ajanlatkeres",
   keywords: [
     "ajánlatkérés épületüzemeltetés",

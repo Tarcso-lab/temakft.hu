@@ -12,7 +12,7 @@ import { segments } from "@/lib/content";
 export const metadata: Metadata = buildMetadata({
   title: "Megoldások épülettípus szerint",
   description:
-    "Generálkivitelezés és műszaki üzemeltetés épülettípusonként: irodaház, ipari csarnok, üzlet, szálloda, intézmény, társasház, beruházó, ingatlankezelő.",
+    "Létesítményüzemeltetés és műszaki karbantartás épülettípusonként: irodaház, ipari csarnok, üzlet, szálloda, intézmény, társasház, beruházó, ingatlankezelő.",
   path: "/megoldasok",
   keywords: [
     "irodaház üzemeltetés",

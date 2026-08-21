@@ -22,26 +22,26 @@ import { articles, hubs, segments } from "@/lib/content";
 import { formatDateHu } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Generálkivitelezés és műszaki épületüzemeltetés | TEMA",
+  title: "Létesítményüzemeltetés, facility management | TEMA",
   description:
-    "Generálkivitelezés és műszaki épületüzemeltetés Budapesten és Pest vármegyében: teljes körű kivitelezés minden szakággal, egyetlen felelős partnerrel.",
+    "Létesítményüzemeltetés Budapesten és Pest vármegyében: szerződéses karbantartás, hibaelhárítás, érintésvédelmi felülvizsgálat — erős- és gyengeáramú rendszerekre, egyetlen felelős partnerrel.",
   path: "/",
   keywords: [
-    "műszaki épületüzemeltetés",
+    "létesítményüzemeltetés",
+    "facility management",
     "épületüzemeltetés",
+    "ingatlanüzemeltetés",
+    "karbantartási szerződés",
+    "érintésvédelmi felülvizsgálat",
     "villamos üzemeltetés",
-    "gyengeáramú rendszerek",
-    "kamerarendszer telepítés",
-    "beléptető rendszer",
-    "épületautomatizálás",
-    "generálkivitelezés",
+    "műszaki koordináció",
   ],
 });
 
 const homeFaq = [
   {
-    q: "Mit jelent pontosan a műszaki épületüzemeltetés?",
-    a: "Az épület műszaki rendszereinek folyamatos működtetését jelenti: tervezett megelőző karbantartást, hibaelhárítást, mérések és felülvizsgálatok elvégzését, valamint a műszaki dokumentáció naprakészen tartását. A TEMA ezt erős- és gyengeáramú rendszerekre egyaránt vállalja, egyetlen szerződés keretében.",
+    q: "Mit jelent pontosan a létesítményüzemeltetés?",
+    a: "Az épület műszaki rendszereinek folyamatos működtetését jelenti: tervezett megelőző karbantartást, hibaelhárítást, mérések és felülvizsgálatok elvégzését, valamint a műszaki dokumentáció naprakészen tartását. Nemzetközi szóhasználatban ez a facility management műszaki ága. A TEMA ezt erős- és gyengeáramú rendszerekre egyaránt vállalja, egyetlen szerződés keretében.",
   },
   {
     q: "Milyen épületekkel foglalkoznak?",
@@ -49,7 +49,7 @@ const homeFaq = [
   },
   {
     q: "Csak üzemeltetést vállalnak, vagy kivitelezést is?",
-    a: "Mindkettőt. Vállalunk tervezést és kivitelezést, projektalapon generálkivitelezést, és hosszú távú üzemeltetést is. A legtöbb ügyfelünknél ez a három egymásra épül: amit megtervezünk és megépítünk, azt utána mi is üzemeltetjük.",
+    a: "A fő tevékenységünk a folyamatos létesítményüzemeltetés, de vállalunk tervezést és kivitelezést is. Ha a munka több szakágat érint, a műszaki koordinációt mi visszük, a szakági munkát pedig bevált alvállalkozói körrel valósítjuk meg — a felelősség egyben marad. A legtöbb ügyfelünknél ez egymásra épül: amit megépítünk, azt utána mi is üzemeltetjük.",
   },
   {
     q: "Mennyi idő alatt kapok ajánlatot?",
@@ -102,25 +102,29 @@ export default function HomePage() {
           <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
             <div>
               <Reveal>
-                <Eyebrow dark>Generálkivitelezés · Budapest és Pest vármegye</Eyebrow>
+                <Eyebrow dark>Létesítményüzemeltetés · Budapest és Pest vármegye</Eyebrow>
               </Reveal>
 
               <Reveal delay={0.05}>
-                {/* A H1 szándékosan tartalmazza a „generálkivitelezés" szót:
-                    a kutatás szerint ez a legnagyobb volumenű (1 300/hó),
-                    reálisan megnyerhető kifejezés (nehézségi pontszám 13). */}
-                <h1 className="display-1 mt-6 max-w-[17ch] text-white">
-                  <span className="text-signal-400">Generálkivitelezés</span> és
-                  épületüzemeltetés egy kézben.
+                {/* A H1 a létesítményüzemeltetésre épül. A kutatás szerint ez
+                    a szűkebb (140/hó), de a hozzá tartozó kör — facility
+                    management 390, épületüzemeltetés 50, ingatlanüzemeltetés 50
+                    — együtt is versenymentes: a nehézségi pontszám 0–11, és a
+                    találati lista nagy részét álláshirdetések és tanfolyamok
+                    foglalják el. A cég tényleges tevékenysége is ez. */}
+                <h1 className="display-1 mt-6 max-w-[18ch] text-white">
+                  <span className="text-signal-400">Létesítményüzemeltetés</span> és
+                  műszaki karbantartás egy kézben.
                 </h1>
               </Reveal>
 
               <Reveal delay={0.1}>
                 <p className="mt-7 max-w-xl text-[1.05rem] leading-relaxed text-stone-400">
-                  Teljes körű kivitelezés minden szakággal — építőmesteri munkáktól a gépészeten
-                  és a villamosságon át a festésig. Emellett erős- és gyengeáramú rendszerek
-                  tervezése, karbantartása és folyamatos üzemeltetése. Egy szerződés, egy
-                  határidő, egy felelős partner.
+                  Szerződéses létesítményüzemeltetés irodaházaknak, ipari és kereskedelmi
+                  ingatlanoknak, társasházaknak: tervezett karbantartás, ügyeleti hibaelhárítás,
+                  érintésvédelmi és szabványossági felülvizsgálat. Erős- és gyengeáramú
+                  rendszereket tervezünk, kivitelezünk és üzemeltetünk — egy szerződés, egy
+                  felelős partner.
                 </p>
               </Reveal>
 

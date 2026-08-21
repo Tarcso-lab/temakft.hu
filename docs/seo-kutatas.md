@@ -1,7 +1,12 @@
 # SEO-kutatás — DataForSEO, magyar piac
 
-Forrás: DataForSEO Labs (Google, Magyarország, magyar nyelv). Lekérdezve: 2026. augusztus.
-Vizsgált kulcsszó: 495 nyers, ebből 380 releváns. Lekérdezési költség: 0,30 USD.
+Forrás: DataForSEO Labs (Google, Magyarország, magyar nyelv).
+
+A kutatás két menetben készült:
+
+- **2026. augusztus 15.** — alapkutatás, 495 vizsgált kulcsszó (380 releváns).
+- **2026. augusztus 17.** — átpozicionálás: versenytárs- és élő SERP-elemzés.
+  Ennek eredménye a **0. szakasz**, amely felülírja az 1. pont következtetését.
 
 > **Módszertani megjegyzés.** A `keyword_overview` és az élő SERP-végpont a fiók
 > verifikációja miatt zárolt volt, ezért az adatok a `keyword_suggestions` és a
@@ -10,8 +15,103 @@ Vizsgált kulcsszó: 495 nyers, ebből 380 releváns. Lekérdezési költség: 0
 > weboldal még nincs élesben, tehát ez most úgysem lenne értelmezhető).
 
 ---
+---
 
-## 1. A legfontosabb megállapítás
+## 0. Frissítés: átpozicionálás — 2026. augusztus 17.
+
+**Ez a szakasz felülírja az 1. pont eredeti következtetését.**
+
+Az eredeti kutatás a generálkivitelezést jelölte meg fő iránynak, mert
+volumenben az a legerősebb (a teljes kör ≈ 2 350 keresés/hó). A cég tényleges
+profilja viszont a létesítményüzemeltetés: a kivitelezést elvállalja, de a
+szakági munkát alvállalkozói körrel valósítja meg. Emiatt a súlypont átkerült.
+
+### Miért éri meg a szűkebb volumenű irány?
+
+Élő SERP-elemzés, „létesítményüzemeltetés budapest", top 10 organikus:
+
+| # | Domain | Mi ez? |
+|---|---|---|
+| 1 | rustler.hu | valódi FM-szolgáltató |
+| 2 | hu.indeed.com | **álláshirdetés** |
+| 3 | millenia.hu | valódi FM-szolgáltató |
+| 4 | hu.jooble.org | **álláshirdetés** |
+| 5 | l-a-b-a.hu | **tanfolyam** |
+| 6 | hu.jobsora.com | **álláshirdetés** |
+| 7 | fmbusiness.hu | **hírportál** |
+| 8 | profession.hu | **álláshirdetés** |
+| 9 | buda-office.hu | valódi FM-szolgáltató (angol nyelvű aloldallal) |
+| 10 | bgk.uni-obuda.hu | **egyetemi szak** |
+
+**Tíz találatból három valódi szolgáltató.**
+
+### A piacvezető organikus lábnyoma
+
+A Millenia Zrt. — 26 éve a piacon, 1,34 millió m² üzemeltetett terület —
+teljes rangsorolt kulcsszókészlete:
+
+| Kulcsszó | Keresés/hó | Helyezés |
+|---|---|---|
+| facility management | 390 | **14.** |
+| facility | 390 | 30. |
+| alvállalkozó | 210 | 41. |
+| millenniumtelep, millennium, ensi kft, firma, innovinia | 260–1900 | 27.–87., mind **véletlen találat** |
+
+A piacvezető a **saját fő kulcsszavára a 14. helyen áll**, és az egész
+domainjére **5 hivatkozó domain** mutat. Ezt a rést organikusan nem védi senki.
+
+### Az új kulcsszókészlet
+
+**Elsődleges — létesítményüzemeltetés:**
+
+| Kulcsszó | Keresés/hó | KD | CPC (USD) |
+|---|---|---|---|
+| facility management | 390 | **0** | 2,20–4,42 |
+| létesítményüzemeltetés | 140 | **8** | 3,15 |
+| ingatlanüzemeltetés | 50 | 11 | 3,21 |
+| épületüzemeltetés | 50 | **0** | 4,06 |
+| létesítménygazdálkodás | 50 | **0** | 3,99 |
+| karbantartási szerződés | 40 | 6 | — |
+| épület karbantartás | 30 | — | 1,01 |
+| irodaház üzemeltetés | 20 | — | **6,53** |
+| társasház üzemeltetés | 10 | — | **5,56** |
+
+**A tényleges forgalmi motor** ezek mellett továbbra is az
+`érintésvédelmi felülvizsgálat`: **1 300 keresés/hó, KD 0** — tiszta
+üzemeltetési téma, és a cég ténylegesen végzi.
+
+**Másodlagos — műszaki koordináció:** műszaki koordináció, műszaki
+projektmenedzsment, szakági koordináció. Önmagukban jelentéktelen volumenűek
+(10–20/hó), de a pozicionálás második pilléreként szükségesek.
+
+**Megtartva, egyetlen aloldalon:** generálkivitelezés (1 300/hó, KD 13),
+generálkivitelező (590/hó, KD 7).
+
+### Amit szándékosan elejtettünk
+
+**„Műszaki ellenőr" — 1 000 keresés/hó, KD 0.** Számokban ez az egész kutatás
+egyik legjobb aránya, mégsem célozzuk:
+
+1. **Névjegyzékhez kötött cím** Magyarországon, a cégnek nincs ilyen
+   jogosultsága. Jogszerűen nem hirdethető.
+2. A találati listát **a helyi találati doboz uralja** — hat egyéni vállalkozó
+   Google-értékelésekkel. Ez Cégprofil-verseny, nem tartalmi verseny.
+3. Tíz organikus találatból kettő álláshirdetés, kettő szakiportál.
+
+### Egy figyelmeztetés a fő kulcsszóhoz
+
+A „létesítményüzemeltetés" keresési szándéka **erősen hígított**: a kapcsolódó
+keresések közt ott van a „képzés", „állás" és „okj" is. Ezért nem erre az egy
+szóra épült a pozicionálás, hanem a köré szervezett, tiszta kereskedelmi
+szándékú kifejezésekre és a konkrét szolgáltatásokra.
+
+
+## 1. A legfontosabb megállapítás *(eredeti, 2026. augusztus 15.)*
+
+> **Felülírva.** Ez a szakasz az alapkutatás eredeti következtetését őrzi meg.
+> A tényleges irányt a **0. szakasz** tartalmazza: a generálkivitelezés
+> volumene valós, de nem a cég profilja, ezért a súly a
+> létesítményüzemeltetésre került.
 
 **A generálkivitelezés reálisan megnyerhető, az üzemeltetés pedig szinte
 verseny nélküli terep.**
@@ -220,10 +320,17 @@ tudástári cikk és szolgáltatásoldal is.
 
 ## 7. Következő lépések
 
-1. **Fiók verifikálása** a DataForSEO-nál — ezzel a `keyword_overview` és az élő
-   SERP is elérhetővé válik, így követhető lesz a saját rangsor is.
-2. **Google Search Console** beállítása élesítés után.
-3. **Google Cégprofil** létrehozása — a helyi keresésekben ez a legnagyobb
-   hatású lépés, és a „… Budapest" típusú kifejezéseknél megkerülhetetlen.
-4. Három hónap múlva érdemes újrafuttatni a kutatást, és a Tudástárat a
+1. ~~**Fiók verifikálása** a DataForSEO-nál~~ — **kész**, az élő SERP-végpont
+   elérhető, a 0. szakasz már ebből dolgozik.
+2. ~~**Google Search Console** beállítása~~ — **kész**, a tulajdon hitelesítve.
+3. **Bing Webmaster Tools** hitelesítés befejezése — a `BingSiteAuth.xml` kint
+   van. Enélkül a Bing az IndexNow-bejelentéseket is elutasítja, és a Copilot
+   meg a ChatGPT keresési találatai a Bing indexéből dolgoznak.
+4. **Google Cégprofil** létrehozása — a helyi keresésekben ez a legnagyobb
+   hatású lépés. A „műszaki ellenőr" és a „létesítményüzemeltetés" találati
+   listáját egyaránt a helyi találati doboz uralja, tehát ez nem opcionális.
+5. **Az átpozicionálás hatásának mérése** — a Search Console-ban 4–6 hét múlva
+   látszik, mely kifejezésekre jelenik meg az oldal. Az akkori adat alapján
+   érdemes eldönteni, kell-e önálló `facility management` aloldal.
+6. Három hónap múlva érdemes újrafuttatni a kutatást, és a Tudástárat a
    ténylegesen behozó kifejezések köré bővíteni.

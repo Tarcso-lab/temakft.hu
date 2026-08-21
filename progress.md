@@ -1,6 +1,6 @@
 # TEMA Menedzsment Kft. — weboldal · állapotjelentés
 
-**Utolsó frissítés:** 2026. augusztus 17.
+**Utolsó frissítés:** 2026. augusztus 17. (második kiadás)
 **Állapot:** **élesben van.** A weboldal a saját domainen fut, az űrlapok
 mentenek és e-mail értesítést küldenek.
 
@@ -16,11 +16,34 @@ mentenek és e-mail értesítést küldenek.
 |---|---|
 | Oldalak száma | **51** indexelhető oldal (58 építéskor, a technikai útvonalakkal együtt) |
 | Tartalom | ~4 000 sor strukturált szöveg (8 tartalmi adatfájl) |
-| Képek | 36 illusztráció, WebP formátumban — összesen 3,8 MB |
+| Képek | 37 illusztráció, WebP formátumban — összesen 4,1 MB |
 | Komponensek | 22 React-komponens |
 | Adatbázis | Supabase, `leads` tábla 33 oszloppal, sorszintű biztonsággal |
 | Kiszolgálás | Cloudflare Workers, globális CDN-ről |
 | Verziókövetés | GitHub — [Tarcso-lab/temakft.hu](https://github.com/Tarcso-lab/temakft.hu) |
+
+### Pozicionálás
+
+**A weboldal elsődleges profilja a létesítményüzemeltetés**, második pillére a
+műszaki koordináció. Ez 2026. augusztus 17-én változott: korábban a
+generálkivitelezés volt a vezető téma.
+
+**Miért.** A generálkivitelezés kulcsszó-volumene valós (a teljes kör
+≈ 2 350 keresés/hó), de nem a cég profilja — a kivitelezést elvállalja, a
+szakági munkát viszont alvállalkozói körrel valósítja meg. A friss
+versenytárs-elemzés emellett kimutatta, hogy az üzemeltetési rés **organikusan
+védtelen**: a „létesítményüzemeltetés budapest" tíz organikus találatából csak
+**három valódi szolgáltató**, a piacvezető Millenia pedig a saját fő
+kulcsszavára (facility management, 390/hó) a **14. helyen** áll.
+
+**A generálkivitelezés nem tűnt el**, egyetlen aloldalra került a Projektek
+menüpont alatt — így a hozzá tartozó volumen megmarad, de nem ez az identitás.
+
+Részletek és teljes kulcsszókészlet: [`docs/seo-kutatas.md`](docs/seo-kutatas.md)
+**0. szakasz**.
+
+**Elejtve:** a „műszaki ellenőr" kulcsszókör (1 000/hó, KD 0) — névjegyzékhez
+kötött cím, a cégnek nincs ilyen jogosultsága.
 
 ### Ami elkészült
 
@@ -53,9 +76,10 @@ történt** — lásd a 2.1 pontot.
 egyszínű változatban is, hímzéshez és szitanyomáshoz.
 
 **SEO.** Valós DataForSEO-adatokra épülő kulcsszókutatás (495 vizsgált
-kifejezés), egyedi meta-adatok minden oldalon, strukturált adatok
-(Organization, Service, FAQPage, Article, BreadcrumbList), automatikus
-oldaltérkép.
+kifejezés), majd 2026. augusztus 17-én versenytárs- és élő SERP-elemzés, ami
+az átpozicionáláshoz vezetett. Egyedi meta-adatok minden oldalon, strukturált
+adatok (Organization, Service, FAQPage, Article, BreadcrumbList), automatikus
+oldaltérkép valós módosítási dátumokkal, RSS-csatorna.
 
 **Dokumentáció és segédeszközök.**
 
@@ -92,11 +116,21 @@ A Vercel még mindig rá van kötve a GitHub-tárolóra, és minden feltöltésn
 fölöslegesen lefuttat egy építést. A domain már nem mutat rá, tehát ártalmatlan
 — de érdemes kikapcsolni az automatikus élesítést vagy törölni a projektet.
 
-### 2.3 Google Search Console
+### 2.3 Keresőkonzolok
 
-A domain él, a `sitemap.xml` elérhető — **most már van értelme beküldeni.**
-Tulajdon hitelesítése, majd az oldaltérkép beküldése. Enélkül nem látszik,
-mire jelenik meg a weboldal.
+**Google Search Console** — a tulajdon hitelesítve (`google-site-verification`
+DNS-rekord él). Ami hátravan: az oldaltérkép beküldése. Két bejegyzés kell,
+külön-külön: `sitemap.xml` és `tudastar/rss.xml`.
+
+**Bing Webmaster Tools** — a `BingSiteAuth.xml` fájl kint van a domain
+gyökerében, a hitelesítést a Bing felületén kell befejezni. A leggyorsabb út az
+„Import from Google Search Console". **Amíg ez nincs meg, a Bing az
+IndexNow-bejelentéseket 403-mal elutasítja** — és a Copilot meg a ChatGPT
+keresési találatai a Bing indexéből dolgoznak, tehát ez az AI-láthatóság kapuja.
+
+Az átpozicionálás után érdemes a Search Console URL-ellenőrzőjében indexelést
+kérni a főoldalra, a `/uzemeltetes` és a `/projektek` oldalra — ez a három
+hordozza az új pozicionálást.
 
 ### 2.4 Google Cégprofil
 
@@ -133,12 +167,22 @@ Csökkenő sorrendben, amivel a legtöbbet lehet nyerni:
    illusztráció — jó helykitöltő, de nem bizonyíték.
 3. **Ügyfélvélemények**, akár két mondat, névvel és cégnévvel.
 
-### 3.2 Az oldaltérkép `lastmod` mezőjének javítása — *valódi hiba*
+### 3.2 Indexelési jelzések — *kész*
 
-A `src/app/sitemap.ts` minden oldalra a lekérdezés pillanatát írja
-módosítási dátumnak. A Google ilyenkor egy idő után figyelmen kívül hagyja a
-mezőt — pont azt a jelzést veszítjük el, amivel a friss tartalmat kiemelhetnénk.
-A cikkeknél már jó a megoldás; ezt kell kiterjeszteni a többi oldaltípusra.
+- **Az oldaltérkép `lastmod` mezője javítva.** Korábban minden oldalra a
+  lekérdezés pillanatát írta, amitől a Google előbb-utóbb figyelmen kívül hagyja
+  a mezőt. Most valós dátumok mennek ki: az oldal saját `updatedAt` értéke,
+  ennek hiányában a `CONTENT_REVISION` alapérték.
+- **RSS-csatorna** a tudástárhoz: `/tudastar/rss.xml`.
+- **IndexNow**: kulcsfájl, `scripts/indexnow.mjs` és GitHub Action — minden
+  feltöltés után bejelenti a címeket. A Yandex elfogadja; **a Bing addig
+  elutasítja, amíg a Webmaster Tools-beli hitelesítés nincs befejezve.**
+
+**Amit fontos tudni:** a Google-nél **nincs** automatikus indexelési kérelem
+általános oldalakra. Az Indexing API kizárólag álláshirdetésre és élő
+közvetítésre használható, a sitemap-ping végpontot 2023-ban megszüntették.
+Ami a Google felé hat: pontos `lastmod`, RSS, belső linkelés, gyors
+kiszolgálás — és a Search Console kézi „Indexelés kérése" gombja.
 
 ### 3.3 Napi tartalom: előbb a szerkesztési folyamat
 
@@ -165,12 +209,16 @@ A kutatás legérdekesebb megállapítása: a „műszaki épületüzemeltetés"
 listáján **a nyolc helyből kettőt álláshirdetés-portál foglal el**, a többi
 nagy, személytelen FM-cég. Ez szokatlanul gyenge verseny.
 
-### 3.5 Mérés
+### 3.5 Mérés — *bekötve*
 
-Jelenleg semmilyen látogatottságmérés nincs a weboldalon — ezt az adatkezelési
-tájékoztató is így rögzíti. Élesítés után érdemes egy adatvédelmi szempontból
-tiszta megoldást bekötni. **Ha bekötjük, az adatkezelési tájékoztató 5.
-pontját frissíteni kell.**
+A **Cloudflare Web Analytics** működik: süti nélküli, egyedi látogatóazonosítót
+nem képző, összesített mérés. Az adatkezelési tájékoztató 5. pontja ehhez
+igazítva.
+
+Egy buktató, ami sokáig rejtve maradt: a Cloudflare felületén az „automatikus
+telepítés" be volt kapcsolva, de **nem mért semmit** — az automatikus beszúrás
+a Worker által előállított válaszokon nem fut le. A mérőkód ezért kézzel került
+a layoutba.
 
 ---
 
@@ -189,17 +237,21 @@ pontját frissíteni kell.**
 
 ## 5. Javasolt sorrend
 
-1. **Cloudflare API-token törlése** *(1 perc, biztonsági)*
-2. **Search Console + oldaltérkép beküldése** *(fél óra — most már van értelme)*
-3. **Google Cégprofil létrehozása** *(fél óra, a legnagyobb azonnali hatás)*
-4. **Vercel leválasztása** *(5 perc)*
-5. **Jogi átnézés elindítása** *(a leghosszabb átfutás)*
-6. **`lastmod` javítása** *(fél óra, valódi hiba)*
+1. **Bing Webmaster Tools hitelesítés befejezése** *(5 perc — a fájl kint van)*
+2. **Oldaltérkép beküldése a Search Console-ba** *(10 perc)*
+3. **Cloudflare API-token törlése** *(1 perc, biztonsági)*
+4. **Google Cégprofil létrehozása** *(fél óra, a legnagyobb azonnali hatás —
+   a fő kulcsszavaink találati listáját a helyi találati doboz uralja)*
+5. **Vercel leválasztása** *(5 perc)*
+6. **Jogi átnézés elindítása** *(a leghosszabb átfutás)*
 7. **Referenciamunkák és saját fotók összegyűjtése** *(folyamatos — ez hozza a legtöbbet)*
 8. Tudástár bővítése, előtte a szerkesztési folyamat rendbetétele
 
-Az 1–4. lépés együtt egy délelőtt alatt elvégezhető. A 7. az, amin hosszú távon
+Az 1–5. lépés együtt egy délelőtt alatt elvégezhető. A 7. az, amin hosszú távon
 a weboldal eredményessége múlik.
+
+**4–6 hét múlva** érdemes visszanézni a Search Console-ba: akkor látszik, hogy
+az átpozicionálás mely kifejezésekre hozott megjelenést.
 
 ---
 

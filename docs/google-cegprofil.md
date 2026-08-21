@@ -1,63 +1,136 @@
-# Google Cégprofil (Business Profile) — leírás
+# Google Cégprofil (Business Profile) — teljes beállítási csomag
 
-## A leírás (750 karakteres limitre optimalizálva)
+> **Miért ez a legfontosabb egyetlen lépés?** A kutatás mindkét fő
+> kulcsszavunknál ugyanazt mutatta: a találati listát a **helyi találati doboz**
+> uralja. A „létesítményüzemeltetés budapest" keresésnél hat helyi találat
+> jelenik meg, a „műszaki ellenőr"-nél szintén hat — jóval a szerves találatok
+> előtt. Ide kizárólag Cégprofillal lehet bekerülni; a weboldal tartalma
+> önmagában nem elég.
+
+---
+
+## 1. A leírás
+
+Másold be szó szerint (a Google 750 karaktert enged):
 
 ```
-A TEMA Menedzsment Kft. generálkivitelezéssel és műszaki épületüzemeltetéssel foglalkozik Budapesten és Pest vármegyében.
+A TEMA Menedzsment Kft. létesítményüzemeltetéssel és műszaki karbantartással foglalkozik Budapesten és Pest vármegyében.
 
-Generálkivitelezőként a teljes építési feladatot visszük: építőmesteri munkák, épületgépészet, villamosság, szárazépítés, burkolás, festés és asztalosmunka — egy szerződésben, egy felelőssel. Lakásfelújítást, családi házat, irodát és üzlethelyiséget egyaránt vállalunk.
+Szerződéses üzemeltetést vállalunk irodaházaknak, ipari és logisztikai létesítményeknek, kereskedelmi ingatlanoknak, szállodáknak, intézményeknek és társasházaknak: tervezett megelőző karbantartás, ügyeleti hibaelhárítás, érintésvédelmi és szabványossági felülvizsgálat, naprakész műszaki dokumentáció.
 
-Szakmai magunk az épületek erős- és gyengeáramú rendszere: villamos hálózatok, kamerarendszerek, beléptetés, kaputelefon, strukturált hálózat, valamint KNX és Loxone épületautomatizálás. Ezeket tervezzük, kivitelezzük, karbantartjuk és üzemeltetjük.
+Szakmai magunk az épületek erős- és gyengeáramú rendszere: villamos hálózatok, kamerarendszerek, beléptetés, kaputelefon, strukturált hálózat, KNX és Loxone épületautomatizálás. Ezeket tervezzük, kivitelezzük és üzemeltetjük.
 
 Díjmentes felmérés, tételes árajánlat. Szerződéses partnereinknek 0–24 ügyelet.
 ```
 
-**Hossz: 724 karakter** — szóközökkel, írásjelekkel és a bekezdésközökkel együtt
-számolva, tehát 26 karakter tartalékkal fér bele a 750-es korlátba.
-
----
-
-## Miért így épül fel?
-
-A Google Cégprofil leírásának első 1–2 mondata jelenik meg kiemelten, ezért az
-első sor tartalmazza a két fő szolgáltatást és a földrajzi területet — pontosan
-azokkal a szavakkal, amikre a kutatás szerint keresnek:
-
-| Beépített kifejezés | Havi keresés | Nehézség |
-|---|---|---|
-| generálkivitelezés | 1 300 | 13 |
-| lakásfelújítás Budapest | 390 | 1 |
-| kamerarendszer | 720 | — |
-| beléptető rendszer | 720 | — |
-| kaputelefon | 4 400 | — |
-| épületautomatizálás / KNX / Loxone | 1 260 együtt | 0–3 |
-| facility management / épületüzemeltetés | 440 együtt | 0 |
-
+**Amit tudni érdemes róla.** A Google a leírás **első egy-két mondatát** emeli
+ki, ezért az első sor tartalmazza a fő szolgáltatást és a földrajzi területet.
 A záró sor a két legerősebb konverziós érv: a díjmentes felmérés és a 0–24
-ügyelet. A sürgősségi keresések (SOS, azonnal, 0–24) a legmagasabb értékű
-csoport — kattintásonként 6–8 dollár körüli hirdetési árral.
+ügyelet — a sürgősségi keresések a legdrágább kattintási csoport.
+
+**Amit ne tegyél bele:** telefonszámot, e-mail címet vagy URL-t. Ezeknek külön
+mező van, a leírásban a Google kifogásolhatja őket.
 
 ---
 
-## Beállítási tudnivalók
+## 2. Kategóriák — ez a legfontosabb beállítás
 
-**Kategóriák.** A Google a kategóriát erősebben veszi figyelembe, mint a
-leírást. Javasolt beállítás:
+A Google a **kategóriát erősebben veszi figyelembe, mint a leírást.** Az
+elsődleges kategória dönti el, milyen keresésekre jelensz meg egyáltalán.
 
-- Elsődleges: **Építőipari vállalkozó** (General contractor)
-- További: **Villanyszerelő**, **Biztonsági rendszerek szolgáltatója**,
-  **Épületfelújítás**, **Létesítménykezelő szolgáltatás**
+**Elsődleges: `Épület- és ingatlankarbantartás` (Property maintenance)**
 
-**Szolgáltatási terület.** Mivel nincs ügyfélforgalom számára nyitva álló
-telephely, a profilt **szolgáltatási területű vállalkozásként** kell beállítani,
-nem címmel. Így a cím nem jelenik meg nyilvánosan. Megadandó terület: Budapest
-és Pest vármegye.
+Ez a legjobb illeszkedés a létesítményüzemeltetéshez, és a helyi adatok is ezt
+támasztják alá: a Budapest környéki hasonló profilú cégek közül **ezt használják
+a legtöbben** (a vizsgált 124 találatból 10-nél szerepel). A
+`Facility management company` kategória a magyar piacon gyakorlatilag
+használatlan — egyetlen vizsgált cégnél sem fordult elő.
 
-**Szolgáltatások.** A leírás mellett külön fel lehet venni tételes
-szolgáltatásokat — ezek önállóan is megjelennek a keresésben. Érdemes felvenni:
-generálkivitelezés, lakásfelújítás, kamerarendszer telepítés, beléptető rendszer,
-kaputelefon szerelés, érintésvédelmi felülvizsgálat, épületautomatizálás,
-műszaki épületüzemeltetés.
+**További kategóriák** (a Google kilencet enged, érdemes kihasználni):
 
-**Amit kerülni kell.** A leírásba ne kerüljön telefonszám, e-mail cím vagy URL —
-a Google ezeket kifogásolhatja, mert külön mezőben kell megadni őket.
+| Kategória | Miért |
+|---|---|
+| Villanyszerelő | A szakmai mag, és nagy a keresési volumene |
+| Biztonsági rendszereket telepítő szolgáltató | Kamera, beléptetés, kaputelefon |
+| Épületgépészeti vállalkozó (HVAC) | Az üzemeltetéshez tartozik |
+| Építőipari vállalkozó (General contractor) | A generálkivitelezés miatt |
+| Elektromos berendezés javítása | Hibaelhárítás |
+
+> **Amit kerülj el:** az `Ingatlankezelő cég` (Property management company)
+> kategóriát. Népszerű a környéken, de a bérbeadás és a közös képviselet
+> jelentést hordozza — olyan megkereséseket hozna, amiket nem tudtok kiszolgálni.
+
+---
+
+## 3. Szolgáltatások
+
+A kategóriák alatt tételesen felvehetők a szolgáltatások, és ezek **önállóan is
+megjelennek a keresésben**. A friss kulcsszókutatás alapján ebben a sorrendben
+érdemes felvenni őket:
+
+1. Létesítményüzemeltetés
+2. Műszaki épületüzemeltetés
+3. Karbantartási szerződés
+4. Érintésvédelmi felülvizsgálat *(1 300 keresés/hó — a legerősebb egyedi tétel)*
+5. Hibaelhárítás, ügyelet
+6. Villamos üzemeltetés
+7. Kamerarendszer telepítés
+8. Beléptetőrendszer
+9. Kaputelefon szerelés
+10. Strukturált hálózat
+11. Épületautomatizálás (KNX, Loxone)
+12. Műszaki koordináció, projektmenedzsment
+13. Generálkivitelezés
+
+---
+
+## 4. Alapbeállítások
+
+**Szolgáltatási terület, nem cím.** Mivel nincs ügyfélforgalom számára nyitva
+álló telephely, a profilt **szolgáltatási területű vállalkozásként** kell
+beállítani. Így a cím nem jelenik meg nyilvánosan — ez egyben megoldja a
+székhely-nyilvánossági kérdést is a Cégprofil oldalán.
+
+Megadandó terület: **Budapest** és **Pest vármegye**.
+
+**Weboldal:** `https://temakft.hu` — www nélkül, mert ez a kanonikus cím.
+
+**Nyitvatartás:** a valós munkaidő. Ha van 0–24 ügyelet szerződéses
+partnereknek, azt **ne** a nyitvatartásba írd (mert akkor mindenki éjjel is
+hívni fog), hanem a leírásba — ahogy fent szerepel.
+
+---
+
+## 5. Vélemények — a helyi rangsor valódi mozgatója
+
+Ezt érdemes komolyan venni, mert a mért adat egyértelmű. A
+„létesítményüzemeltetés budapest" helyi találati dobozában megjelenő cégek:
+
+| Cég | Értékelés | Vélemények |
+|---|---|---|
+| Future FM Zrt. | 3,8 | **77** |
+| Dome Facility Services | 4,3 | **33** |
+| Millenia Zrt. | 4,2 | 5 |
+| Társasház-Management | 5,0 | 2 |
+
+A „műszaki ellenőr" keresésnél ugyanez: az első helyi találat egy **egyéni
+vállalkozó 5,0-ás értékeléssel és 37 véleménnyel** — megelőzve minden céget.
+
+**Vagyis néhány tucat valódi vélemény többet ér a helyi rangsorban, mint bármi,
+amit a weboldal szövegén csiszolni lehet.** Kérj véleményt minden lezárt munka
+után, a Cégprofilban generálható rövid linkkel.
+
+---
+
+## 6. Ellenőrzőlista
+
+- [ ] Profil létrehozása, **szolgáltatási területű** vállalkozásként
+- [ ] Elsődleges kategória: Épület- és ingatlankarbantartás
+- [ ] További kategóriák felvétele (a 2. pont táblázata)
+- [ ] Leírás beillesztése (1. pont)
+- [ ] Szolgáltatások felvétele (3. pont)
+- [ ] Weboldal, telefonszám, terület, nyitvatartás
+- [ ] Hitelesítés elvégzése *(a Google levélben, telefonon vagy videón kéri)*
+- [ ] Legalább 5–10 saját fotó feltöltése — munka közben készült képek, nem
+      illusztrációk
+- [ ] Véleménykérő link elmentése, és beépítése a munkalezárási folyamatba

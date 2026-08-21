@@ -87,7 +87,7 @@ oldaltérkép valós módosítási dátumokkal, RSS-csatorna.
 |---|---|
 | `README.md` | Üzemeltetési kézikönyv: indítás, beállítás, tartalomszerkesztés |
 | `docs/seo-kutatas.md` | A DataForSEO piackutatás teljes eredménye |
-| `docs/google-cegprofil.md` | Cégprofil-leírás (724 karakter) + beállítási útmutató |
+| `docs/google-cegprofil.md` | Cégprofil: leírás, kategóriák, szolgáltatások, ellenőrzőlista |
 | `docs/uj-cikk.md` | Hogyan írj új tudástári cikket, másolható sablonnal |
 | `docs/deploy.md` | Élesítés és üzemeltetés Cloudflare-en, hibakereséssel |
 | `docs/resend-teszt.ps1` | E-mail küldés ellenőrzése egy paranccsal |
@@ -134,9 +134,26 @@ hordozza az új pozicionálást.
 
 ### 2.4 Google Cégprofil
 
-A leírás elkészült (`docs/google-cegprofil.md`). **A helyi keresésekben ez a
-legnagyobb hatású egyetlen lépés.** „Szolgáltatási területű vállalkozásként"
-kell beállítani, cím nélkül.
+**A teljes beállítási csomag elkészült:** [`docs/google-cegprofil.md`](docs/google-cegprofil.md)
+— leírás (732 karakter), kategóriák indoklással, 13 szolgáltatás, ellenőrzőlista.
+A profilt magát Google-fiókból kell létrehozni.
+
+**Miért ez a legnagyobb hatású lépés:** mindkét fő kulcsszavunk találati
+listáját a **helyi találati doboz** uralja, jóval a szerves találatok előtt.
+Ide kizárólag Cégprofillal lehet bekerülni.
+
+Két döntés, amit adat támaszt alá:
+
+- **Elsődleges kategória: Épület- és ingatlankarbantartás.** A Budapest
+  környéki hasonló cégeknél ez a leggyakoribb; a „Facility management company"
+  kategória a magyar piacon gyakorlatilag használatlan.
+- **Kerülendő: Ingatlankezelő cég** — bérbeadást és közös képviseletet jelent,
+  rossz megkereséseket hozna.
+
+**A vélemények döntenek.** A helyi találati dobozban megjelenő cégeknél
+33–77 vélemény a jellemző; a „műszaki ellenőr" első helyi találata egy egyéni
+vállalkozó 37 véleménnyel, minden céget megelőzve. Néhány tucat valódi vélemény
+többet ér a helyi rangsorban, mint bármilyen szövegcsiszolás.
 
 ### 2.5 Fiókhigiénia
 
